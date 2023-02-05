@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:siabang_driver_app/theme.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class CustomTextFormWhatsappField extends StatelessWidget {
+  const CustomTextFormWhatsappField({
     super.key,
     this.title = '',
     this.hintText = '',
@@ -34,6 +35,13 @@ class CustomTextField extends StatelessWidget {
             16,
           ),
           child: TextFormField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(
+                20,
+              ),
+              FilteringTextInputFormatter.digitsOnly,
+            ],
             controller: controller,
             style: primaryTextStyle.copyWith(
               color: spaceCadet,
@@ -60,14 +68,12 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
             validator: (value) {
-              if (value!.isNotEmpty &&
-                  value.length > 12 &&
-                  value.contains('@')) {
+              if (value!.isNotEmpty && value.length > 10) {
                 return null;
-              } else if (value.length < 13 && value.isNotEmpty) {
-                return 'Email yang anda masukkan salah';
+              } else if (value.length < 10 && value.isNotEmpty) {
+                return 'Nomor whatsapp belum terdaftar ';
               } else {
-                return 'Silahkan masukkan email anda';
+                return 'Silahkan masukkan no whatsapp anda';
               }
             },
           ),

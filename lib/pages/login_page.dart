@@ -4,8 +4,49 @@ import 'package:siabang_driver_app/widgets/customTextForm.dart';
 import 'package:siabang_driver_app/widgets/customTextFormPassword.dart';
 import 'package:siabang_driver_app/widgets/custom_button.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool isButtonActive = false;
+  late TextEditingController controllerEmail;
+  late TextEditingController controllerPassword;
+  final _formKey = GlobalKey<FormState>();
+  final _formKeyPw = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controllerEmail = TextEditingController();
+    controllerPassword = TextEditingController();
+    controllerEmail.addListener(() {
+      final isButtonActive = controllerEmail.text.isNotEmpty;
+
+      setState(() {
+        this.isButtonActive = isButtonActive;
+      });
+    });
+    controllerPassword.addListener(() {
+      final isButtonActive = controllerPassword.text.isNotEmpty;
+
+      setState(() {
+        this.isButtonActive = isButtonActive;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controllerEmail.dispose();
+    controllerPassword.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +70,36 @@ class LoginPage extends StatelessWidget {
               'Silahkan masukkan email',
               style: primaryTextStyle,
             ),
-            SizedBox(height: 125),
-            CustomTextField(
-              title: 'Email / No. whatsapp',
-              hintText: 'Email / whatsapp',
+            SizedBox(
+              height: 50,
+            ),
+            Center(
+              child: Container(
+                width: 150,
+                height: 150,
+                child: Image.asset(
+                  'assets/logo_siabang.png',
+                ),
+              ),
+            ),
+            SizedBox(height: 55),
+            Form(
+              key: _formKey,
+              child: CustomTextField(
+                controller: controllerEmail,
+                title: 'Email',
+                hintText: 'johndoe@gmail.com',
+              ),
             ),
             SizedBox(
               height: 20,
             ),
-            CustomTextPasswordField(),
+            Form(
+              key: _formKeyPw,
+              child: CustomTextPasswordField(
+                controller: controllerPassword,
+              ),
+            ),
           ],
         ),
       );
@@ -45,9 +107,7 @@ class LoginPage extends StatelessWidget {
 
     Widget textButton() {
       return Container(
-        margin: EdgeInsets.only(
-          top: 8,
-        ),
+        margin: EdgeInsets.only(top: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -90,16 +150,28 @@ class LoginPage extends StatelessWidget {
     }
 
     Widget button() {
-      return GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            '/verifloginemailPage',
-          );
-        },
+      return Container(
+        width: double.infinity,
         child: CustomButton(
-          margin: EdgeInsets.only(top: 90),
+          margin: EdgeInsets.only(top: 60),
           title: 'Login',
+          bgColor: isButtonActive == true ? midnightBlue : Color(0xffCAC9D1),
+          textColor:
+              isButtonActive == true ? whiteColor : blackColor.withOpacity(0.5),
+          onPressed: isButtonActive
+              ? () {
+                  if (_formKey.currentState!.validate() &&
+                      _formKeyPw.currentState!.validate()) {
+                    return Navigator.pushNamed(
+                      context,
+                      '/verifloginemailPage',
+                    );
+                  }
+                  setState(() {
+                    isButtonActive = true;
+                  });
+                }
+              : null,
         ),
       );
     }

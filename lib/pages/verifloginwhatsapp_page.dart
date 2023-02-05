@@ -1,13 +1,60 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:siabang_driver_app/theme.dart';
 import 'package:siabang_driver_app/widgets/custom_button.dart';
 
-class VerifLoginPage extends StatelessWidget {
-  const VerifLoginPage({super.key});
+class VerifLoginWhatsappPage extends StatefulWidget {
+  const VerifLoginWhatsappPage({super.key});
+
+  @override
+  State<VerifLoginWhatsappPage> createState() => _VerifLoginWhatsappPageState();
+}
+
+class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
+  Timer? countdownTimer;
+  Duration codeDuration = Duration(
+    minutes: 1,
+  );
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    countdownTimer =
+        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  void setCountDown() {
+    final reduceSecondsBy = 1;
+    setState(() {
+      final seconds = codeDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        countdownTimer!.cancel();
+      } else {
+        codeDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  void resetTimer() {
+    stopTimer();
+    setState(
+      () => codeDuration = Duration(minutes: 1),
+    );
+    countdownTimer =
+        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+  }
 
   @override
   Widget build(BuildContext context) {
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = strDigits(codeDuration.inMinutes.remainder(60));
+    final seconds = strDigits(codeDuration.inSeconds.remainder(60));
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -68,7 +115,7 @@ class VerifLoginPage extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  '00:59',
+                  '$minutes:$seconds',
                   style: primaryTextStyle.copyWith(
                     color: midnightBlue,
                   ),
@@ -102,6 +149,7 @@ class VerifLoginPage extends StatelessWidget {
                         fontWeight: semiBold,
                       ),
                       decoration: InputDecoration(
+                        hintText: '0',
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -135,6 +183,39 @@ class VerifLoginPage extends StatelessWidget {
                         fontWeight: semiBold,
                       ),
                       decoration: InputDecoration(
+                          border: InputBorder.none, hintText: '1'),
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(1),
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: aliceBlue,
+                      borderRadius: BorderRadius.circular(
+                        14,
+                      ),
+                    ),
+                    child: TextField(
+                      onChanged: (value) {
+                        if (value.length == 1) {
+                          FocusScope.of(context).nextFocus();
+                        }
+                      },
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: semiBold,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: '9',
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -168,6 +249,7 @@ class VerifLoginPage extends StatelessWidget {
                         fontWeight: semiBold,
                       ),
                       decoration: InputDecoration(
+                        hintText: '4',
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -201,39 +283,7 @@ class VerifLoginPage extends StatelessWidget {
                         fontWeight: semiBold,
                       ),
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(1),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: aliceBlue,
-                      borderRadius: BorderRadius.circular(
-                        14,
-                      ),
-                    ),
-                    child: TextField(
-                      onChanged: (value) {
-                        if (value.length == 1) {
-                          FocusScope.of(context).nextFocus();
-                        }
-                      },
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 18,
-                        fontWeight: semiBold,
-                      ),
-                      decoration: InputDecoration(
+                        hintText: '2',
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -262,6 +312,7 @@ class VerifLoginPage extends StatelessWidget {
                         fontWeight: semiBold,
                       ),
                       decoration: InputDecoration(
+                        hintText: '3',
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -317,7 +368,51 @@ class VerifLoginPage extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: Text(
+                        'Apa anda yakin ?',
+                        style: primaryTextStyle.copyWith(
+                          color: midnightBlue,
+                        ),
+                      ),
+                      content: Text(
+                        'Kirim ulang kode verifikasi?',
+                        style: primaryTextStyle.copyWith(
+                          color: midnightBlue,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            resetTimer();
+                            Navigator.pushNamed(
+                              context,
+                              '/verifloginwhatsappPage',
+                            );
+                          },
+                          child: Text(
+                            'OK',
+                            style: primaryTextStyle.copyWith(
+                              color: spaceCadet,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: primaryTextStyle.copyWith(
+                              color: spaceCadet,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   child: Text(
                     'Kirim ulang kode',
                     style: primaryTextStyle.copyWith(
@@ -347,9 +442,15 @@ class VerifLoginPage extends StatelessWidget {
             children: [
               header(),
               formField(),
+              SizedBox(
+                height: 80,
+              ),
               CustomButton(
                 margin: EdgeInsets.only(top: 290),
                 title: 'Verifikasi',
+                bgColor: midnightBlue,
+                textColor: whiteColor,
+                onPressed: () {},
               ),
             ],
           ),

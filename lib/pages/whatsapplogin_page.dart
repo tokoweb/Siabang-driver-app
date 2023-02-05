@@ -3,8 +3,41 @@ import 'package:siabang_driver_app/theme.dart';
 import 'package:siabang_driver_app/widgets/customTextForm.dart';
 import 'package:siabang_driver_app/widgets/custom_button.dart';
 
-class WhatsappLoginPage extends StatelessWidget {
+import '../widgets/customTextFormPassword.dart';
+import '../widgets/customTextFormWhatsapp.dart';
+
+class WhatsappLoginPage extends StatefulWidget {
   const WhatsappLoginPage({super.key});
+
+  @override
+  State<WhatsappLoginPage> createState() => _WhatsappLoginPageState();
+}
+
+class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
+  bool isButtonActive = false;
+  late TextEditingController controller;
+  final _formkey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+    controller.addListener(() {
+      final isButtonActive = controller.text.isNotEmpty;
+
+      setState(() {
+        this.isButtonActive = isButtonActive;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +61,26 @@ class WhatsappLoginPage extends StatelessWidget {
               'Silahkan masukkan whatsapp',
               style: primaryTextStyle,
             ),
-            SizedBox(height: 250),
-            CustomTextField(
-              title: 'No. whatsapp',
-              hintText: 'whatsapp',
+            SizedBox(
+              height: 50,
+            ),
+            Center(
+              child: Container(
+                width: 200,
+                height: 200,
+                child: Image.asset(
+                  'assets/logo_siabang.png',
+                ),
+              ),
+            ),
+            SizedBox(height: 50),
+            Form(
+              key: _formkey,
+              child: CustomTextFormWhatsappField(
+                controller: controller,
+                title: 'No. whatsapp',
+                hintText: '+62 81234567890',
+              ),
             ),
           ],
         ),
@@ -76,17 +125,30 @@ class WhatsappLoginPage extends StatelessWidget {
             children: [
               header(),
               textButton(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/verifloginPage',
-                  );
-                },
-                child: CustomButton(
-                  margin: EdgeInsets.only(top: 90),
-                  title: 'Selanjutnya',
-                ),
+              SizedBox(
+                height: 50,
+              ),
+              CustomButton(
+                margin: EdgeInsets.only(top: 60),
+                title: 'Selanjutnya',
+                bgColor:
+                    isButtonActive == true ? midnightBlue : Color(0xffCAC9D1),
+                textColor: isButtonActive == true
+                    ? whiteColor
+                    : blackColor.withOpacity(0.5),
+                onPressed: isButtonActive
+                    ? () {
+                        if (_formkey.currentState!.validate()) {
+                          return Navigator.pushNamed(
+                            context,
+                            '/verifloginwhatsappPage',
+                          );
+                        }
+                        setState(() {
+                          isButtonActive = true;
+                        });
+                      }
+                    : null,
               ),
             ],
           ),

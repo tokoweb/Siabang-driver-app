@@ -3,7 +3,7 @@ import 'package:siabang_driver_app/pages/createnewpassword_page.dart';
 import 'package:siabang_driver_app/pages/login_page.dart';
 import 'package:siabang_driver_app/pages/resetpassword_page.dart';
 import 'package:siabang_driver_app/pages/splash_page.dart';
-import 'package:siabang_driver_app/pages/veriflogin_page.dart';
+import 'package:siabang_driver_app/pages/verifloginwhatsapp_page.dart';
 import 'package:siabang_driver_app/pages/verifloginemail_page.dart';
 import 'package:siabang_driver_app/pages/verifresetpassword_page.dart';
 import 'package:siabang_driver_app/pages/whatsapplogin_page.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         '/loginPage': (context) => LoginPage(),
         '/whatsappPage': (context) => WhatsappLoginPage(),
         '/resetPage': (context) => ResetPasswordPage(),
-        '/verifloginPage': (context) => VerifLoginPage(),
+        '/verifloginwhatsappPage': (context) => VerifLoginWhatsappPage(),
         '/verifloginemailPage': (context) => VerifLoginEmailPage(),
         '/verifresetpasswordPage': (context) => VerifResetPasswordPage(),
         '/createnewpasswordPage': (context) => CreateNewPasswordPage(),

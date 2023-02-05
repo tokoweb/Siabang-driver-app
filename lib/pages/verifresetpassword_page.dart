@@ -351,6 +351,9 @@ class VerifResetPasswordPage extends StatelessWidget {
                 child: CustomButton(
                   margin: EdgeInsets.only(top: 290),
                   title: 'Verifikasi',
+                  bgColor: midnightBlue,
+                  textColor: whiteColor,
+                  onPressed: () {},
                 ),
               ),
             ],

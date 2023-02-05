@@ -76,7 +76,7 @@ class ResetPasswordPage extends StatelessWidget {
                 hintText: 'Email / whatsapp',
               ),
               SizedBox(
-                height: 200,
+                height: 190,
               ),
               GestureDetector(
                 onTap: () {
@@ -88,6 +88,9 @@ class ResetPasswordPage extends StatelessWidget {
                 child: CustomButton(
                   margin: EdgeInsets.only(),
                   title: 'Kirim',
+                  bgColor: midnightBlue,
+                  textColor: whiteColor,
+                  onPressed: () {},
                 ),
               ),
             ],

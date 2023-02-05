@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/theme.dart';
-import 'package:siabang_driver_app/widgets/customTextFormPassword.dart';
 import 'package:siabang_driver_app/widgets/custom_button.dart';
 import 'package:siabang_driver_app/widgets/customconfirmnewpw.dart';
 import 'package:siabang_driver_app/widgets/customnewpw.dart';
@@ -81,6 +80,11 @@ class CreateNewPasswordPage extends StatelessWidget {
               CustomButton(
                 margin: EdgeInsets.only(top: 105),
                 title: 'Kirim',
+                bgColor: midnightBlue,
+                textColor: whiteColor,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/loginPage');
+                },
               ),
             ],
           ),

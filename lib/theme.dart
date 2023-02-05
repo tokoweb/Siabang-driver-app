@@ -6,6 +6,8 @@ Color bgColor = Color(0xffFDFDFF);
 Color aliceBlue = Color(0xffEBF2FA);
 Color midnightBlue = Color(0xff031863);
 Color whiteColor = Color(0xffFFFFFF);
+Color crimsonColor = Color(0xffD62839);
+Color blackColor = Color(0xff28292C);
 
 FontWeight bold = FontWeight.w700;
 FontWeight semiBold = FontWeight.w600;
