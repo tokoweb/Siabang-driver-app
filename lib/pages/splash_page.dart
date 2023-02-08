@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/theme.dart';
+import 'package:siabang_driver_app/constant/images.dart';
+import 'package:siabang_driver_app/constant/theme.dart';
+
+import '../domain/commons/nav_utils.dart';
+import 'auth/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -16,8 +20,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(
       Duration(seconds: 3),
       (() {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/loginPage', (route) => false);
+        nextScreenReplace(LoginPage());
       }),
     );
     super.initState();
@@ -39,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
                 top: 200,
               ),
               child: Image.asset(
-                'assets/logo_siabang.png',
+                logoSiabang,
               ),
             ),
             SizedBox(
