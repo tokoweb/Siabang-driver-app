@@ -6,6 +6,7 @@ import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/auth/login_page.dart';
 import 'package:siabang_driver_app/pages/profile/edit_profile_page.dart';
+import 'package:siabang_driver_app/pages/profile/sim_info_page.dart';
 
 import '../../domain/commons/info_application_page.dart';
 import '../../domain/commons/privacy_policy_page.dart';
@@ -47,166 +48,170 @@ class _ProfilePageState extends State<ProfilePage> {
                   topRight: Radius.circular(24),
                 ),
               ),
-              child: Container(
-                margin: EdgeInsets.only(top: kToolbarHeight - 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Center(
-                      child: Text(
-                        "Arya Kurniawan",
-                        style: primaryTextStyle.copyWith(
-                          fontWeight: bold,
-                          fontSize: 16,
-                          color: blackColor,
-                        ),
+              // child: Container(
+              margin: EdgeInsets.only(top: kToolbarHeight - 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(
+                    child: Text(
+                      "Arya Kurniawan",
+                      style: primaryTextStyle.copyWith(
+                        fontWeight: bold,
+                        fontSize: 16,
+                        color: blackColor,
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        "aryakurniawan@gmail.com • 081234567890",
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 12,
-                          color: disableColor,
-                        ),
+                  ),
+                  Center(
+                    child: Text(
+                      "aryakurniawan@gmail.com • 081234567890",
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 12,
+                        color: disableColor,
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Divider(thickness: 2),
-                    ListTile(
-                      leading: Image.asset(
-                        'assets/icons/ic_profilepage.png',
-                        width: 20,
-                        height: 20,
-                        color: midnightBlue,
-                      ),
-                      minLeadingWidth: 2,
-                      visualDensity: VisualDensity.comfortable,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Edit profile"),
-                      onTap: () {
-                        nextScreen(EditProfilePage());
-                      },
+                  ),
+                  SizedBox(height: 16),
+                  Divider(thickness: 2),
+                  ListTile(
+                    leading: Image.asset(
+                      'assets/icons/ic_profilepage.png',
+                      width: 20,
+                      height: 20,
+                      color: midnightBlue,
                     ),
-                    ListTile(
-                      leading: Image.asset(
-                        icSim,
-                        width: 25,
-                        height: 25,
-                      ),
-                      minLeadingWidth: 0,
-                      visualDensity: VisualDensity.comfortable,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Infromasi SIM"),
-                      trailing: Container(
-                        width: 108,
-                        height: 18,
-                        decoration: BoxDecoration(
-                            color: crimsonColor,
-                            borderRadius: BorderRadius.circular(
-                              10,
-                            )),
-                        child: Center(
-                          child: Text(
-                            'Perpanjang Sim',
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 12,
-                              color: whiteColor,
-                            ),
+                    minLeadingWidth: 2,
+                    visualDensity: VisualDensity.comfortable,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Edit profile"),
+                    onTap: () {
+                      nextScreen(EditProfilePage());
+                    },
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      icSim,
+                      width: 25,
+                      height: 25,
+                    ),
+                    onTap: () {
+                      nextScreen(
+                        SimInfoPage(),
+                      );
+                    },
+                    minLeadingWidth: 0,
+                    visualDensity: VisualDensity.comfortable,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Informasi SIM"),
+                    trailing: Container(
+                      width: 108,
+                      height: 18,
+                      decoration: BoxDecoration(
+                          color: crimsonColor,
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          )),
+                      child: Center(
+                        child: Text(
+                          'Perpanjang Sim',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 12,
+                            color: whiteColor,
                           ),
                         ),
                       ),
                     ),
-                    ListTile(
-                      leading: Image.asset(
-                        icPassword,
-                        width: 25,
-                        height: 25,
-                      ),
-                      visualDensity: VisualDensity.comfortable,
-                      minLeadingWidth: 0,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Ganti Password"),
-                      onTap: () {
-                        nextScreen(ChangePasswordPage());
-                      },
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      icPassword,
+                      width: 25,
+                      height: 25,
                     ),
-                    ListTile(
-                      leading: Image.asset(
-                        icTermCondition,
-                        width: 25,
-                        height: 25,
-                      ),
-                      minLeadingWidth: 0,
-                      visualDensity: VisualDensity.comfortable,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Syarat & Ketentuan"),
-                      onTap: () {
-                        nextScreen(TermConditionPage());
-                      },
+                    visualDensity: VisualDensity.comfortable,
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Ganti Password"),
+                    onTap: () {
+                      nextScreen(ChangePasswordPage());
+                    },
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      icTermCondition,
+                      width: 25,
+                      height: 25,
                     ),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      leading: Image.asset(
-                        icPrivacyPolicy,
-                        width: 25,
-                        height: 25,
-                      ),
-                      minLeadingWidth: 0,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Kebijakan Privasi"),
-                      visualDensity: VisualDensity.comfortable,
-                      onTap: () {
-                        nextScreen(
-                          PrivacyPolicyPage(),
-                        );
-                      },
+                    minLeadingWidth: 0,
+                    visualDensity: VisualDensity.comfortable,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Syarat & Ketentuan"),
+                    onTap: () {
+                      nextScreen(TermConditionPage());
+                    },
+                  ),
+                  ListTile(
+                    minVerticalPadding: 0,
+                    leading: Image.asset(
+                      icPrivacyPolicy,
+                      width: 25,
+                      height: 25,
                     ),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      leading: Image.asset(
-                        icInfo,
-                        width: 25,
-                        height: 25,
-                      ),
-                      minLeadingWidth: 0,
-                      contentPadding: EdgeInsets.zero,
-                      visualDensity: VisualDensity.comfortable,
-                      title: Text("Tentang Aplikasi"),
-                      onTap: () {
-                        nextScreen(
-                          InfoApplicationPage(),
-                        );
-                      },
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Kebijakan Privasi"),
+                    visualDensity: VisualDensity.comfortable,
+                    onTap: () {
+                      nextScreen(
+                        PrivacyPolicyPage(),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    minVerticalPadding: 0,
+                    leading: Image.asset(
+                      icInfo,
+                      width: 25,
+                      height: 25,
                     ),
-                    ListTile(
-                      minVerticalPadding: 0,
-                      leading: Image.asset(
-                        icLogout,
-                        width: 25,
-                        height: 25,
-                      ),
-                      minLeadingWidth: 0,
-                      contentPadding: EdgeInsets.zero,
-                      visualDensity: VisualDensity.comfortable,
-                      title: Text("Logout"),
-                      onTap: () {
-                        GeneralDialog.show(
-                          title: "Logout",
-                          body:
-                              "Apakah anda yakin ingin keluar dari\naplikasi ini?",
-                          onTapNegative: () {},
-                          onTapPositive: () {
-                            nextScreenRemoveUntil(
-                              LoginPage(),
-                            );
-                          },
-                        );
-                      },
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.comfortable,
+                    title: Text("Tentang Aplikasi"),
+                    onTap: () {
+                      nextScreen(
+                        InfoApplicationPage(),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    minVerticalPadding: 0,
+                    leading: Image.asset(
+                      icLogout,
+                      width: 25,
+                      height: 25,
                     ),
-                  ],
-                ),
+                    minLeadingWidth: 0,
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.comfortable,
+                    title: Text("Logout"),
+                    onTap: () {
+                      GeneralDialog.show(
+                        title: "Logout",
+                        body:
+                            "Apakah anda yakin ingin keluar dari\naplikasi ini?",
+                        onTapNegative: () {},
+                        onTapPositive: () {
+                          nextScreenRemoveUntil(
+                            LoginPage(),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ),

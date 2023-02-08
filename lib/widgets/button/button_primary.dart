@@ -50,7 +50,7 @@ class ButtonPrimary extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           ),
           backgroundColor: MaterialStateProperty.all(
-            !enabled ? Colors.grey : color ?? spaceCadet,
+            !enabled ? Colors.grey : color ?? midnightBlue,
           ),
         ),
         onPressed: () {

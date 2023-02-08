@@ -4,6 +4,7 @@ import 'package:siabang_driver_app/constant/images.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/notif/notif_page.dart';
+import 'package:siabang_driver_app/pages/uang_cod/uang_cod_page.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_stop_work.dart';
 import 'package:siabang_driver_app/widgets/task/orderan_masuk_card.dart';
@@ -34,7 +35,9 @@ class _HomePageState extends State<HomePage> {
   Widget buttonUangCod() {
     return Container(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          nextScreen(UangCodPage());
+        },
         child: Row(
           children: [
             Image.asset(
