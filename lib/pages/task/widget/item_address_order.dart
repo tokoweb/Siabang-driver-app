@@ -71,7 +71,9 @@ class ItemAddressOrderPage extends StatelessWidget {
             visible: note != null,
             child: Row(
               children: [
-                const Icon(Icons.sticky_note_2_outlined),
+                Image.asset(
+                  icNote,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   note ?? "",

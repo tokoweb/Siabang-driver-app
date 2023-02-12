@@ -68,7 +68,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
               Row(
                 children: [
                   Text(
-                    widget.status != STATUSORDER.UNPAID
+                    widget.status != STATUSORDER.PENDING
                         ? "No. Resi"
                         : "Kode booking",
                     style: primaryTextStyle.copyWith(
@@ -77,7 +77,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                     ),
                   ),
                   Spacer(),
-                  Text(widget.status != STATUSORDER.UNPAID
+                  Text(widget.status != STATUSORDER.PENDING
                       ? "987yhE62w"
                       : "123456789123456"),
                   SizedBox(width: 10),

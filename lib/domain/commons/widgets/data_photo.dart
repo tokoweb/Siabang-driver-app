@@ -18,10 +18,12 @@ class DataPhoto extends StatelessWidget {
         dashPattern: const [6, 2],
         radius: const Radius.circular(16),
         padding: const EdgeInsets.all(25),
-        child: Icon(
-          Icons.add,
-          size: 24,
-          color: midnightBlue,
+        child: Center(
+          child: Image(
+            image: AssetImage(icAdd),
+            width: 24,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

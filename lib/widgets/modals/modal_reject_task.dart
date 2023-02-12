@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/task/status_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/customTextField/customTextField.dart';
+import 'package:siabang_driver_app/widgets/customTextField/customTextForm.dart';
 import 'package:siabang_driver_app/widgets/dialog/general_dialog.dart';
-import 'package:siabang_driver_app/widgets/dialog/reject_task_dialog.dart';
+import 'package:siabang_driver_app/widgets/dialog/success_task_option_dialog.dart';
 
 import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
@@ -122,7 +124,15 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
                         value: e['desc'] as String,
                         onChanged: (String? val) {
                           value = val ?? "";
-                          setState(() {});
+                          setState(() {
+                            Center(
+                              child: Container(
+                                child: Text(
+                                  'Halo Pramudia',
+                                ),
+                              ),
+                            );
+                          });
                         },
                       ),
                       title: Text(
@@ -147,7 +157,7 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
             child: ButtonPrimary(
               title: "Kirim",
               onTap: () {
-                RejectDialog.show();
+                TaskOptionDialog.show(title: 'Penolakan tugas telah\ndikirim');
               },
             ),
           ),

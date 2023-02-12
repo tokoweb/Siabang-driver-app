@@ -10,7 +10,7 @@ import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
 import '../../constant/theme.dart';
 
-class RejectDialog {
+class TaskOptionDialog {
   static Future show({
     String? title,
     String? body,
@@ -18,14 +18,14 @@ class RejectDialog {
     return showDialog(
       context: NavKey.navKey.currentState!.context,
       builder: (BuildContext builderContext) {
-        Timer(Duration(seconds: 3), () {
+        Timer(Duration(milliseconds: 1500), () {
           backScreenUntil();
         });
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          child: RejectDialogView(
+          child: TaskOptionDialogView(
             title: title,
             body: body,
           ),
@@ -35,10 +35,10 @@ class RejectDialog {
   }
 }
 
-class RejectDialogView extends StatelessWidget {
+class TaskOptionDialogView extends StatelessWidget {
   final String? title, body;
 
-  const RejectDialogView({
+  const TaskOptionDialogView({
     Key? key,
     this.title,
     this.body,
@@ -69,7 +69,7 @@ class RejectDialogView extends StatelessWidget {
           ),
           SizedBox(height: 32),
           Text(
-            'Penolakan tugas telah\ndikirim',
+            title ?? '',
             style: primaryTextStyle.copyWith(
               fontSize: 18,
               fontWeight: bold,

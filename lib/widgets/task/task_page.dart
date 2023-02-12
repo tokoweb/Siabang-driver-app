@@ -9,13 +9,13 @@ import '../../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 enum STATUSORDER {
-  UNPAID,
+  PENDING,
   ONPROGRESS,
   COMPlETED,
   CANCELED,
   NEW,
   NEWOUTOFTOWN,
-  REJECTED
+  REJECTED,
 }
 
 enum STATUSDRIVER { INIT, ACCEPTEDUNPAID, ACCEPTEDPAID, ARRIVED }

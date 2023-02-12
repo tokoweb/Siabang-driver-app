@@ -6,9 +6,11 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.title = '',
     this.hintText = '',
+    this.maxLines = 1,
     this.controller,
   });
 
+  final int maxLines;
   final String title;
   final String hintText;
   final TextEditingController? controller;
@@ -34,6 +36,7 @@ class CustomTextField extends StatelessWidget {
             16,
           ),
           child: TextFormField(
+            maxLines: maxLines,
             controller: controller,
             style: primaryTextStyle.copyWith(
               color: spaceCadet,
@@ -57,6 +60,7 @@ class CustomTextField extends StatelessWidget {
               ),
               contentPadding: EdgeInsets.only(
                 left: 20,
+                top: 10,
               ),
             ),
             validator: (value) {

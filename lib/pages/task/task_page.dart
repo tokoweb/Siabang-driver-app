@@ -28,6 +28,7 @@ class _TaskPageState extends State<TaskPage> {
 
   List<STATUSORDER> items = [
     STATUSORDER.ONPROGRESS,
+    STATUSORDER.PENDING,
     STATUSORDER.REJECTED,
     STATUSORDER.COMPlETED,
     STATUSORDER.NEW,

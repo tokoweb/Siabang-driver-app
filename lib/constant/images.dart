@@ -2,6 +2,7 @@ const pathIcons = 'assets/icons/';
 const pathImages = 'assets/images/';
 
 const String icArrow = '${pathIcons}ic_arrow.png';
+const String icAdd = '${pathIcons}ic_add.png';
 const String icBell = '${pathIcons}ic_bell.png';
 const String icBook = '${pathIcons}ic_book.png';
 const String icBox = '${pathIcons}ic_box.png';
@@ -25,6 +26,7 @@ const String icEdit = '${pathIcons}ic_edit.png';
 const String icDividerVert = '${pathIcons}ic_divider_vert.png';
 const String icDelete = '${pathIcons}ic_delete.png';
 const String icLogout = '${pathIcons}ic_logout.png';
+const String icNote = '${pathIcons}ic_note.png';
 const String icSuccess = '${pathIcons}ic_success.png';
 const String icVehicle = '${pathIcons}ic_vehicle.png';
 const String icBarcode = '${pathIcons}ic_barcode.png';
