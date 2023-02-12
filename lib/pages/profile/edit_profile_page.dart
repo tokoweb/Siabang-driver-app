@@ -35,11 +35,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 Container(
                   width: 98,
                   height: 98,
-                  child: Image.asset(
-                    ppImages,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        ppImages,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
+                  top: kToolbarHeight * 1,
                   bottom: 0,
                   right: 0,
                   child: CircleAvatar(

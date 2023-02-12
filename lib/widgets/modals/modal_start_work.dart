@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/home_page.dart';
-import 'package:siabang_driver_app/pages/main_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
 import '../../constant/theme.dart';
 
-class ModalStopWork {
+class ModalStartWork {
   static Future show(BuildContext context) async {
     return await showModalBottomSheet(
       context: context,
@@ -20,15 +19,19 @@ class ModalStopWork {
       ),
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return const ContinueLiveChatModalView();
+        return const ContinueLiveChatModalView(
+          onClick: true,
+        );
       },
     );
   }
 }
 
 class ContinueLiveChatModalView extends StatelessWidget {
-  const ContinueLiveChatModalView({Key? key}) : super(key: key);
+  const ContinueLiveChatModalView({Key? key, required this.onClick})
+      : super(key: key);
 
+  final bool onClick;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +64,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
           ),
           const SizedBox(height: kToolbarHeight),
           Image.asset(
-            icBox,
+            icDriver,
             width: 90,
             height: 90,
           ),
@@ -69,14 +72,14 @@ class ContinueLiveChatModalView extends StatelessWidget {
             height: 20,
           ),
           Text(
-            "Apakah anda ingin berhenti bekerja\nuntuk hari ini?",
+            "Apakah anda siap bekerja\nuntuk hari ini?",
             style: primaryTextStyle.copyWith(
               fontSize: 13,
               color: blackColor,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -93,9 +96,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
               Expanded(
                 child: ButtonOutline(
                   title: 'Ya',
-                  onTap: () {
-                    nextScreen(MainScreen());
-                  },
+                  onTap: () {},
                 ),
               ),
             ],

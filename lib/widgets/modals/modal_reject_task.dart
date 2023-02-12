@@ -1,14 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/task/status_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/dialog/general_dialog.dart';
+import 'package:siabang_driver_app/widgets/dialog/reject_task_dialog.dart';
 
 import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
-class ModalDeliveryCourier {
+class ModalRejectTask {
   static Future show(BuildContext context, {String? initialValue}) async {
     return await showModalBottomSheet(
       context: context,
@@ -22,41 +25,32 @@ class ModalDeliveryCourier {
       enableDrag: true,
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return DeliveryCourierModalView(initialValue: initialValue);
+        return DeliveryRejectTaskView(initialValue: initialValue);
       },
     );
   }
 }
 
-class DeliveryCourierModalView extends StatefulWidget {
+class DeliveryRejectTaskView extends StatefulWidget {
   final String? initialValue;
-  const DeliveryCourierModalView({Key? key, this.initialValue})
-      : super(key: key);
+  const DeliveryRejectTaskView({Key? key, this.initialValue}) : super(key: key);
 
   @override
-  State<DeliveryCourierModalView> createState() =>
-      _DeliveryCourierModalViewState();
+  State<DeliveryRejectTaskView> createState() => _DeliveryRejectTaskViewState();
 }
 
-class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
+class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
   TextEditingController queryController = TextEditingController();
   String? value;
   List<Map<String, dynamic>> _couriers = [
     {
-      "id": "D 1939 YU",
-      "transportation_type": "Motor",
+      "desc": "Lokasi pickup terlalu jauh",
     },
     {
-      "id": "D 1139 YU",
-      "transportation_type": "Motor",
+      "desc": "Armada sedang tidak tersedia",
     },
     {
-      "id": "D 1929 YU",
-      "transportation_type": "Motor",
-    },
-    {
-      "id": "D 1339 YU",
-      "transportation_type": "Motor",
+      "desc": "Lainnya",
     },
   ];
   @override
@@ -68,7 +62,7 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenHeight(context) * 0.55,
+      height: screenHeight(context) * 0.50,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -94,7 +88,7 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
           ),
           SizedBox(height: 16),
           Text(
-            "Pilih armada",
+            "Tolak tugas",
             style: primaryTextStyle.copyWith(
               fontWeight: bold,
               color: blackColor,
@@ -105,65 +99,43 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 30,
+                      bottom: 10,
+                    ),
+                    child: Text(
+                      'Kenapa anda menolak tugas ini?',
+                      style: primaryTextStyle.copyWith(
+                        color: blackColor,
+                      ),
+                    ),
+                  ),
                   ..._couriers.map((e) {
                     return ListTile(
-                      title: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 34,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  icVehicle,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 14,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${e['id']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 14,
-                                  color: blackColor,
-                                ),
-                              ),
-                              Text(
-                                "${e['transportation_type']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 11,
-                                  color: greyColor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        value = e['id'];
-                        setState(() {});
-                      },
-                      trailing: Radio(
+                      leading: Radio(
                         groupValue: value,
                         activeColor: midnightBlue,
-                        value: e['id'] as String,
+                        value: e['desc'] as String,
                         onChanged: (String? val) {
                           value = val ?? "";
                           setState(() {});
                         },
                       ),
+                      title: Text(
+                        "${e['desc']}",
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 14,
+                          color: blackColor,
+                        ),
+                      ),
+                      onTap: () {
+                        value = e['desc'];
+                        setState(() {});
+                      },
                     );
                   }).toList(),
                 ],
@@ -173,14 +145,11 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
           Container(
             margin: EdgeInsets.all(16),
             child: ButtonPrimary(
-              title: "Pilih",
+              title: "Kirim",
               onTap: () {
-                nextScreen(StatusOrderPage());
+                RejectDialog.show();
               },
             ),
-          ),
-          SizedBox(
-            height: 30,
           ),
         ],
       ),

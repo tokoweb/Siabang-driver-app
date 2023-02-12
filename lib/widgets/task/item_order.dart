@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
+import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 
-class ItemDriver extends StatefulWidget {
-  final STATUSDRIVER statusdriver;
+class ItemOrder extends StatefulWidget {
+  final STATUSORDER statusOrder;
   final Function() onTap;
-  const ItemDriver(
-      {Key? key,
-      required this.onTap,
-      this.statusdriver = STATUSDRIVER.ACCEPTEDUNPAID})
+  const ItemOrder(
+      {Key? key, required this.onTap, this.statusOrder = STATUSORDER.CANCELED})
       : super(key: key);
 
   @override
-  State<ItemDriver> createState() => _ItemDriverState();
+  State<ItemOrder> createState() => _ItemOrderState();
 }
 
-class _ItemDriverState extends State<ItemDriver> {
+class _ItemOrderState extends State<ItemOrder> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -82,30 +82,44 @@ class _ItemDriverState extends State<ItemDriver> {
                           horizontal: 10, vertical: 1),
                       decoration: BoxDecoration(
                         color: () {
-                          switch (widget.statusdriver) {
-                            case STATUSDRIVER.ACCEPTEDUNPAID:
-                              return Colors.red;
-                            case STATUSDRIVER.INIT:
-                              return Colors.grey[300];
-                            case STATUSDRIVER.ACCEPTEDPAID:
-                              return Colors.blue;
-                            case STATUSDRIVER.ARRIVED:
+                          switch (widget.statusOrder) {
+                            case STATUSORDER.UNPAID:
+                              return Color(0xffE9C030);
+                            case STATUSORDER.ONPROGRESS:
+                              return Color(0xff258BD4);
+                            case STATUSORDER.COMPlETED:
+                              return Colors.green;
+                            case STATUSORDER.NEW:
                               return Color(0xff08B6C1);
+                            case STATUSORDER.NEWOUTOFTOWN:
+                              return Color(0xff08B6C1);
+                            case STATUSORDER.CANCELED:
+                              return Colors.orange;
+                            case STATUSORDER.REJECTED:
+                              return Colors.red;
+                              break;
                           }
                         }(),
                         borderRadius: BorderRadius.circular(100),
                       ),
                       child: Text(
                         () {
-                          switch (widget.statusdriver) {
-                            case STATUSDRIVER.ACCEPTEDUNPAID:
-                              return '';
-                            case STATUSDRIVER.INIT:
-                              return '';
-                            case STATUSDRIVER.ACCEPTEDPAID:
-                              return '';
-                            case STATUSDRIVER.ARRIVED:
+                          switch (widget.statusOrder) {
+                            case STATUSORDER.UNPAID:
+                              return "pending";
+                            case STATUSORDER.ONPROGRESS:
+                              return "Berlangsung";
+                            case STATUSORDER.NEW:
+                              return "Baru";
+                            case STATUSORDER.COMPlETED:
+                              return "Selesai";
+                            case STATUSORDER.CANCELED:
+                              return "Dibatalkan";
+                            case STATUSORDER.NEWOUTOFTOWN:
                               return 'Baru';
+                            case STATUSORDER.REJECTED:
+                              return 'ditolak';
+                              break;
                           }
                         }(),
                         style: primaryTextStyle.copyWith(
@@ -126,90 +140,32 @@ class _ItemDriverState extends State<ItemDriver> {
                 ),
               ],
             ),
-            const Divider(thickness: 1.5),
-            Container(
-              width: screenWidth(context),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: greyColor.withOpacity(0.25),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    "Pengiriman dalam kota",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 10,
-                      color: blackColor,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Bandung",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 10.sp,
-                      fontWeight: semiBold,
-                      color: blackColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 16),
             const Divider(thickness: 2),
             ...[
               Container(
                 child: () {
-                  switch (widget.statusdriver) {
-                    case STATUSDRIVER.ACCEPTEDUNPAID:
+                  switch (widget.statusOrder) {
+                    case STATUSORDER.UNPAID:
                       return const UnpaidBody();
-                    case STATUSDRIVER.ACCEPTEDPAID:
+                    case STATUSORDER.ONPROGRESS:
                       return const ShippedBody();
-                    case STATUSDRIVER.INIT:
+                    case STATUSORDER.COMPlETED:
                       return const CompletedBody();
-                    case STATUSDRIVER.ARRIVED:
+                    case STATUSORDER.CANCELED:
                       return const CompletedBody();
+                    case STATUSORDER.NEWOUTOFTOWN:
+                      return const NewBodyOutOfTown();
+                    case STATUSORDER.NEW:
+                      return const NewBodyInTheTown();
+                    case STATUSORDER.REJECTED:
+                      return RejectedBody();
+                      break;
                   }
                 }(),
               ),
             ],
             const SizedBox(height: 10),
-            const Divider(thickness: 1.5),
-            const SizedBox(height: 10),
-            Container(
-              width: screenWidth(context),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: greyColor.withOpacity(0.25),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Jemput di lokasi",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 10.sp,
-                      fontWeight: semiBold,
-                      color: blackColor,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      "Menunggu penjemputan paket di lokasi",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.end,
-                      maxLines: 1,
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 10,
-                        color: blackColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -226,7 +182,7 @@ class CompletedBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Penjemputan ",
+          "Penjemputan dari",
           style: primaryTextStyle.copyWith(
             fontSize: 10,
             color: greyColor,
@@ -271,6 +227,26 @@ class CompletedBody extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+              margin: EdgeInsets.only(
+                top: 30,
+              ),
+              title: 'Antar ke lokasi',
+              textColor: whiteColor,
+              bgColor: Color(0xff6975DC),
+              onPressed: () {}),
+        ),
       ],
     );
   }
@@ -312,6 +288,26 @@ class ShippedBody extends StatelessWidget {
             fontSize: 12,
             color: blackColor,
           ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+              margin: EdgeInsets.only(
+                top: 30,
+              ),
+              title: 'Jemput di lokasi & kirim',
+              textColor: whiteColor,
+              bgColor: Color(0xff08B6C1),
+              onPressed: () {}),
         ),
       ],
     );
@@ -443,6 +439,345 @@ class UnpaidBody extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class NewBodyOutOfTown extends StatelessWidget {
+  const NewBodyOutOfTown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: screenWidth(context),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: greyColor.withOpacity(0.25),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "Pengiriman luar kota",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10,
+                  color: blackColor,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "Jakarta",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10.sp,
+                  fontWeight: semiBold,
+                  color: blackColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          "Penjemputan dari",
+          style: primaryTextStyle.copyWith(
+            fontSize: 10,
+            color: greyColor,
+          ),
+        ),
+        Text(
+          "John Doe (0812314313121)",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            fontWeight: bold,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "Bandung Kulon, Kota Bandung, Jawa Barat",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "40123",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: greyColor)),
+              child: Icon(Icons.notes_sharp, color: greyColor, size: 15),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              "Depan jalan samping indomart",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: blackColor,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+              margin: EdgeInsets.only(
+                top: 30,
+              ),
+              title: 'Jemput di lokasi',
+              textColor: whiteColor,
+              bgColor: Color(0xff258BD4),
+              onPressed: () {}),
+        ),
+      ],
+    );
+  }
+}
+
+class NewBodyInTheTown extends StatelessWidget {
+  const NewBodyInTheTown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: screenWidth(context),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: greyColor.withOpacity(0.25),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "Pengiriman dalam kota",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10,
+                  color: blackColor,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "Bandung",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10.sp,
+                  fontWeight: semiBold,
+                  color: blackColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          "Penjemputan dari ",
+          style: primaryTextStyle.copyWith(
+            fontSize: 10,
+            color: greyColor,
+          ),
+        ),
+        Text(
+          "John Doe (0812314313121)",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            fontWeight: bold,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "Bandung Kulon, Kota Bandung, Jawa Barat",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "40123",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: greyColor)),
+              child: Icon(Icons.notes_sharp, color: greyColor, size: 15),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              "Depan jalan samping indomart",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: blackColor,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+              margin: EdgeInsets.only(
+                top: 30,
+              ),
+              title: 'Jemput di lokasi & kirim',
+              textColor: whiteColor,
+              bgColor: Color(0xff08B6C1),
+              onPressed: () {}),
+        ),
+      ],
+    );
+  }
+}
+
+class RejectedBody extends StatelessWidget {
+  const RejectedBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: screenWidth(context),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: greyColor.withOpacity(0.25),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "Pengiriman luar kota",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10,
+                  color: blackColor,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "Yogyakarta",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10.sp,
+                  fontWeight: semiBold,
+                  color: blackColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          "Pengiriman ke ",
+          style: primaryTextStyle.copyWith(
+            fontSize: 10,
+            color: greyColor,
+          ),
+        ),
+        Text(
+          "John Doe (0812314313121)",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            fontWeight: bold,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "Bandung Kulon, Kota Bandung, Jawa Barat",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "40123",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: greyColor)),
+              child: Icon(Icons.notes_sharp, color: greyColor, size: 15),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              "Depan jalan samping indomart",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: blackColor,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+              margin: EdgeInsets.only(
+                top: 30,
+              ),
+              title: 'Kirim',
+              textColor: whiteColor,
+              bgColor: Color(0xffF49D36),
+              onPressed: () {}),
         ),
       ],
     );

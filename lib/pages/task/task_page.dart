@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/task/status_order_page.dart';
+import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/task/item_bar_task.dart';
 
-import '../../widgets/task/orderan_masuk_card.dart';
+import '../../widgets/task/item_order.dart';
+import '../../widgets/task/task_page.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key}) : super(key: key);
@@ -27,13 +28,9 @@ class _TaskPageState extends State<TaskPage> {
 
   List<STATUSORDER> items = [
     STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.UNPAID,
+    STATUSORDER.REJECTED,
     STATUSORDER.COMPlETED,
-    STATUSORDER.CANCELED,
-    STATUSORDER.CANCELED,
+    STATUSORDER.NEW,
   ];
 
   List<STATUSORDER> bckupItems = [];
@@ -71,8 +68,9 @@ class _TaskPageState extends State<TaskPage> {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ItemOrder(
+                    statusOrder: items[index],
                     onTap: () {
-                      nextScreen(StatusOrderPage(
+                      nextScreen(DetailOrderPage(
                         status: items[index],
                         statusdriver: () {
                           if (index == 1) {

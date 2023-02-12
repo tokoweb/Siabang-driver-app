@@ -10,7 +10,7 @@ import 'package:siabang_driver_app/pages/task/detail_form_order_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/modal/modal_image_picker.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
 import 'package:siabang_driver_app/widgets/customTextField/custom_input_text.dart';
 
 import '../../constant/theme.dart';

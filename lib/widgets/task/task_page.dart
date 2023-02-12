@@ -8,7 +8,15 @@ import 'package:siabang_driver_app/widgets/task/item_order.dart';
 import '../../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
-enum STATUSORDER { UNPAID, ONPROGRESS, COMPlETED, CANCELED }
+enum STATUSORDER {
+  UNPAID,
+  ONPROGRESS,
+  COMPlETED,
+  CANCELED,
+  NEW,
+  NEWOUTOFTOWN,
+  REJECTED
+}
 
 enum STATUSDRIVER { INIT, ACCEPTEDUNPAID, ACCEPTEDPAID, ARRIVED }
 
@@ -24,11 +32,10 @@ class _TaskPageState extends State<TaskPage> {
   bool isShow = false;
   String tabSelected = "Semua";
 
-  List<STATUSDRIVER> items = [
-    STATUSDRIVER.ARRIVED,
-    STATUSDRIVER.ACCEPTEDPAID,
-    STATUSDRIVER.INIT,
-    STATUSDRIVER.ACCEPTEDUNPAID,
+  List<STATUSORDER> items = [
+    STATUSORDER.NEW,
+    STATUSORDER.REJECTED,
+    STATUSORDER.COMPlETED,
   ];
 
   @override
@@ -47,7 +54,6 @@ class _TaskPageState extends State<TaskPage> {
         backIsDisable: true,
         leading: InkWell(
           onTap: () {
-            body:
             Container(
               margin: const EdgeInsets.all(16),
               child: Column(
@@ -161,8 +167,8 @@ class _TaskPageState extends State<TaskPage> {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return ItemDriver(
-                                statusdriver: items[index],
+                              return ItemOrder(
+                                statusOrder: items[index],
                                 onTap: () {
                                   nextScreen(const SummaryDetailOrderPage());
                                 },

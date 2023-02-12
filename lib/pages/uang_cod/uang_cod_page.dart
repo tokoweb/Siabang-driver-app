@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
+import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/pages/uang_cod/successful_deposit_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/multi_text/text_column.dart';
 import 'package:siabang_driver_app/widgets/multi_text/text_row.dart';
 
 import '../../domain/commons/widgets/data_photo.dart';
-import '../../widgets/modal/modal_image_picker.dart';
+import '../../widgets/modals/modal_image_picker.dart';
 
 class UangCodPage extends StatelessWidget {
   const UangCodPage({super.key});
@@ -92,7 +94,11 @@ class UangCodPage extends StatelessWidget {
               title: 'Selesai',
               textColor: whiteColor,
               bgColor: midnightBlue,
-              onPressed: () {},
+              onPressed: () {
+                nextScreen(
+                  SuccessDepositPage(),
+                );
+              },
             ),
           ],
         ),

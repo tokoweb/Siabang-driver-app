@@ -6,13 +6,26 @@ import 'package:siabang_driver_app/pages/services/data_information_equipment_pag
 import 'package:siabang_driver_app/pages/services/service_intercity/data_receiver_intercity_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
+import 'package:siabang_driver_app/widgets/button/button_outline.dart';
+import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_delivery_courier.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
 import 'package:siabang_driver_app/widgets/task/item_draft_order.dart';
 
 import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
+import '../../widgets/task/task_page.dart';
 
 class DetailOrderPage extends StatefulWidget {
-  const DetailOrderPage({Key? key}) : super(key: key);
+  final STATUSORDER status;
+  final STATUSDRIVER statusdriver;
+  final bool statusRefund;
+  const DetailOrderPage({
+    Key? key,
+    this.status = STATUSORDER.CANCELED,
+    this.statusdriver = STATUSDRIVER.INIT,
+    this.statusRefund = false,
+  }) : super(key: key);
 
   @override
   State<DetailOrderPage> createState() => _DetailOrderPageState();
@@ -21,20 +34,63 @@ class DetailOrderPage extends StatefulWidget {
 class _DetailOrderPageState extends State<DetailOrderPage> {
   int itemCount = 1;
   String? armadaSelected;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarPrimary(
         title: "Detail orderan",
+        actions: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFF08B6C1),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Text(
+              "Baru",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: whiteColor,
+              ),
+            ),
+          ),
+        ],
         color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman dalam kota",
+        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(16),
+          margin: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                children: [
+                  Text(
+                    widget.status != STATUSORDER.UNPAID
+                        ? "No. Resi"
+                        : "Kode booking",
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 13,
+                      color: blackColor,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(widget.status != STATUSORDER.UNPAID
+                      ? "987yhE62w"
+                      : "123456789123456"),
+                  SizedBox(width: 10),
+                  Icon(Icons.copy, size: 16),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              RowText(
+                  text1: "Tanggal order", text2: "12 Okt 20222 - 10:32 WIB"),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                child: Divider(thickness: 2),
+              ),
               Text(
                 "Alamat",
                 style: primaryTextStyle.copyWith(
@@ -69,7 +125,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                           name: "John Doe",
                           phone: "+62 1237123124",
                           address:
-                              "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
+                              "Bandung Kulon, Kota Bandung, Jawa Barat\n40123",
                           note: "Jalan depan indomart",
                           isEditable: false,
                           onEditTap: () {
@@ -83,7 +139,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                           name: "Jane Doe",
                           phone: "+62 12312412",
                           address:
-                              "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
+                              "Bandung Kulon, Kota Bandung, Jawa Barat\n40123",
                           isEditable: false,
                           onEditTap: () {
                             nextScreen(const DataReceiverIntercityPage(
@@ -95,9 +151,60 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: screenWidth(context),
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: greyColor.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Column(
+                  children: [
+                    RowText(
+                      text1: 'Armada penjemputan',
+                      textStyle1: primaryTextStyle.copyWith(
+                        color: blackColor,
+                      ),
+                      text2: 'Motor',
+                      textStyle2: primaryTextStyle.copyWith(
+                        fontWeight: semiBold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    RowText(
+                      text1: 'Metode pembayaran',
+                      textStyle1: primaryTextStyle.copyWith(
+                        color: blackColor,
+                      ),
+                      text2: 'Tunai (COD)',
+                      textStyle2: primaryTextStyle.copyWith(
+                        fontWeight: semiBold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    RowText(
+                      text1: 'Total pembayaran',
+                      textStyle1: primaryTextStyle.copyWith(
+                        color: blackColor,
+                      ),
+                      text2: 'Rp 90.000',
+                      textStyle2: primaryTextStyle.copyWith(
+                        fontWeight: semiBold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
               Text(
-                "Daftar Orderan",
+                "Informasi barang",
                 style: primaryTextStyle.copyWith(
                   fontWeight: bold,
                   color: blackColor,
@@ -131,89 +238,36 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
               const SizedBox(height: 16),
               const Divider(thickness: 2),
               const SizedBox(height: 16),
-              Column(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: screenWidth(context),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: greyColor.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Motor (Rp80.000)",
-                          style: primaryTextStyle.copyWith(
-                            color: blackColor,
-                          ),
-                        ),
-                        Text(
-                          "Dimensi: 40 kg",
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 13,
-                            color: greyColor,
-                          ),
-                        ),
-                        Text(
-                          "Berat max : 20 x 40 x 30 cm",
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 13,
-                            color: greyColor,
-                          ),
-                        ),
-                      ],
+                  Expanded(
+                    child: ButtonOutline(
+                      title: 'Tolak',
+                      textStyle: primaryTextStyle.copyWith(color: Colors.red),
+                      onTap: () {
+                        ModalRejectTask.show(context);
+                      },
+                      borderColor: Colors.red,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.info_outline, color: midnightBlue, size: 20),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          "Estimasi penjemputan paket dilokasi anda sekitar 10 menit setelah anda menyelesaikan proses ini",
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 12,
-                            color: greyColor,
-                          ),
-                        ),
-                      )
-                    ],
+                  SizedBox(
+                    width: 11,
+                  ),
+                  Expanded(
+                    child: ButtonPrimary(
+                      title: 'Terima',
+                      textStyle: primaryTextStyle.copyWith(
+                        color: whiteColor,
+                      ),
+                      color: Color(0xff27AE60),
+                      onTap: () {
+                        ModalDeliveryCourier.show(context);
+                      },
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              Text(
-                "Biaya",
-                style: primaryTextStyle.copyWith(
-                  fontWeight: bold,
-                  color: blackColor,
-                ),
-              ),
-              const SizedBox(height: 16),
-              const RowText(text1: "Biaya pengiriman", text2: "Rp0"),
-              const RowText(text1: "Asuransi", text2: "Rp120.000"),
-              const RowText(text1: "Diskon", text2: "10%"),
-              RowText(
-                text1: "Total",
-                text2: "Rp 120.000",
-                textStyle1: primaryTextStyle.copyWith(
-                  fontSize: 14,
-                  color: blackColor,
-                  fontWeight: bold,
-                ),
-                textStyle2: primaryTextStyle.copyWith(
-                  fontSize: 14,
-                  color: blackColor,
-                  fontWeight: bold,
-                ),
-              ),
-              const SizedBox(height: 16),
             ],
           ),
         ),

@@ -4,12 +4,14 @@ import 'package:siabang_driver_app/constant/images.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/notif/notif_page.dart';
+import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
 import 'package:siabang_driver_app/pages/uang_cod/uang_cod_page.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_search_order.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_stop_work.dart';
-import 'package:siabang_driver_app/widgets/task/orderan_masuk_card.dart';
+import 'package:siabang_driver_app/widgets/task/task_page.dart';
 
-import '../widgets/task/task_page.dart';
+import '../widgets/task/item_order.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,14 +23,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final now = DateTime.now();
   final DateFormat formatter = DateFormat("dd-MMMM-yyyy");
+  bool tap = false;
+  bool? onClick;
   List<STATUSORDER> items = [
+    STATUSORDER.NEW,
     STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.UNPAID,
+    STATUSORDER.NEWOUTOFTOWN,
     STATUSORDER.COMPlETED,
-    STATUSORDER.CANCELED,
+    STATUSORDER.ONPROGRESS,
+    STATUSORDER.REJECTED,
+    STATUSORDER.UNPAID,
     STATUSORDER.CANCELED,
   ];
 
@@ -226,17 +230,64 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 14,
             ),
-            CustomButton(
-              margin: EdgeInsets.only(
-                top: 14,
-              ),
-              title: 'Mulai bekerja',
-              textColor: whiteColor,
-              bgColor: crimsonColor,
-              onPressed: () {
-                ModalStopWork.show(context);
-              },
-            )
+            onClick == tap
+                ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: whiteColor.withOpacity(0.06),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        width: 260,
+                        height: 45,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                            top: 12,
+                          ),
+                          child: Text(
+                            '5 Jam 28 Menit',
+                            style: primaryTextStyle.copyWith(
+                              fontWeight: semiBold,
+                              fontSize: 18,
+                              color: whiteColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 18,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            ModalStopWork.show(context);
+                          });
+                        },
+                        child: Image(
+                          width: 46,
+                          height: 46,
+                          image: AssetImage(icStop),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  )
+                : CustomButton(
+                    margin: EdgeInsets.only(
+                      top: 14,
+                    ),
+                    title: 'Mulai bekerja',
+                    textColor: whiteColor,
+                    bgColor: crimsonColor,
+                    onPressed: () {
+                      setState(() {
+                        onClick = false;
+                        onClick == tap;
+                      });
+                    })
           ],
         ),
       ),
@@ -335,7 +386,7 @@ class _HomePageState extends State<HomePage> {
               height: 24,
             ),
             Text(
-              'Orderan Masuk',
+              'Orderan Masuk (8)',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -347,15 +398,14 @@ class _HomePageState extends State<HomePage> {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ItemOrder(
-                    onTap: () {},
-                    statusorder: items[index],
+                    statusOrder: items[index],
+                    onTap: () {
+                      nextScreen(DetailOrderPage());
+                    },
                   );
                 },
                 shrinkWrap: true,
               ),
-            ),
-            SizedBox(
-              height: 100,
             ),
             Align(
               alignment: Alignment.bottomRight,
@@ -368,18 +418,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget driverButton() {
-    return Container(
-      width: 60,
-      height: 60,
-      margin: EdgeInsets.only(
-        top: 60,
-      ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            icDriver,
+    return InkWell(
+      onTap: () {
+        SearchOrder.show(context);
+      },
+      child: Container(
+        width: 60,
+        height: 60,
+        margin: EdgeInsets.only(
+          top: 20,
+        ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              icDriver,
+            ),
+            fit: BoxFit.cover,
           ),
-          fit: BoxFit.cover,
         ),
       ),
     );

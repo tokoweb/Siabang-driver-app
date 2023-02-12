@@ -14,10 +14,7 @@ import 'package:siabang_driver_app/pages/task/widget/status_completed_order_widg
 import 'package:siabang_driver_app/pages/task/widget/status_shiped_order_widget.dart';
 import 'package:siabang_driver_app/pages/task/widget/status_unpaid_order_widget.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-
-enum STATUSORDER { UNPAID, ONPROGRESS, COMPlETED, CANCELED }
-
-enum STATUSDRIVER { INIT, ACCEPTEDUNPAID, ACCEPTEDPAID, ARRIVED }
+import 'package:siabang_driver_app/widgets/task/task_page.dart';
 
 class StatusOrderPage extends StatefulWidget {
   final STATUSORDER status;
@@ -42,61 +39,28 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
       appBar: AppBarPrimary(
         title: "Status orderan",
         color: Theme.of(context).scaffoldBackgroundColor,
+        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
+        actions: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Text(
+              "Berlangsung",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: whiteColor,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         margin: EdgeInsets.all(16),
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: midnightBlue.withOpacity(0.125),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: InkWell(
-                onTap: () {
-                  if (widget.status == STATUSORDER.ONPROGRESS) {
-                    nextScreen(DetailStatusPage());
-                  }
-                },
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        () {
-                          switch (widget.status) {
-                            case STATUSORDER.UNPAID:
-                              return "Menunggu pemabayaran";
-                            case STATUSORDER.ONPROGRESS:
-                              if (widget.statusdriver ==
-                                  STATUSDRIVER.ACCEPTEDUNPAID) {
-                                return "Driver sedang menuju lokasi penjemputan (lanju...";
-                              }
-                              if (widget.statusdriver ==
-                                  STATUSDRIVER.ACCEPTEDPAID) {
-                                return "Driver sedang menuju lokasi penjemputan (lanju...";
-                              }
-                              return "Menunggu penjemputan paket di lokasi";
-
-                            case STATUSORDER.COMPlETED:
-                              return "Paket sudah diterima dilokasi tujuan";
-                            case STATUSORDER.CANCELED:
-                              if (widget.statusRefund) {
-                                return "Proses pengembalian berhasil";
-                              }
-                              return "Orderan telah dibatalkan";
-                          }
-                        }(),
-                        overflow: TextOverflow.ellipsis,
-                        style: primaryTextStyle.copyWith(
-                            color: blackColor, fontSize: 12),
-                      ),
-                    ),
-                    Icon(Icons.chevron_right),
-                  ],
-                ),
-              ),
-            ),
             SizedBox(height: 16.h),
             Row(
               children: [
@@ -125,24 +89,65 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
             ),
             ...[
               Container(
-                child: () {
-                  if (widget.status == STATUSORDER.ONPROGRESS) {
-                    return StatusShippedOrderWidget(
-                      statusdriver: widget.statusdriver,
-                    );
-                  }
-                  if (widget.status == STATUSORDER.COMPlETED) {
-                    return StatusCompletedOrderWidget();
-                  }
-                  if (widget.status == STATUSORDER.CANCELED) {
-                    return StatusCanceledOrderWidget(
-                      isSuccessRefund: widget.statusRefund,
-                    );
-                  }
-                  return StatusUnpaidOrderWidget();
-                }(),
+                child: Container(
+                  width: screenWidth(context),
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: greyColor.withOpacity(0.25),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Column(
+                    children: [
+                      RowText(
+                        text1: 'Armada penjemputan',
+                        textStyle1: primaryTextStyle.copyWith(
+                          color: blackColor,
+                        ),
+                        text2: 'Motor',
+                        textStyle2: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      RowText(
+                        text1: 'Metode pembayaran',
+                        textStyle1: primaryTextStyle.copyWith(
+                          color: blackColor,
+                        ),
+                        text2: 'Tunai (COD)',
+                        textStyle2: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      RowText(
+                        text1: 'Total pembayaran',
+                        textStyle1: primaryTextStyle.copyWith(
+                          color: blackColor,
+                        ),
+                        text2: 'Rp 90.000',
+                        textStyle2: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
+            SizedBox(
+              height: 30,
+            ),
+            Divider(
+              thickness: 1,
+            ),
+            SizedBox(
+              height: 30,
+            ),
             InkWell(
               onTap: () {
                 nextScreen(DetailOrderPage());
