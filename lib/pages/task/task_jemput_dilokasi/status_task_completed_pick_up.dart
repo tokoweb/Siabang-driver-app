@@ -4,26 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
-import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/pages/task/task_dalam_kota/summary_detail_page.dart';
-import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
+import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/summary_detail_pick_up_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
-import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
-class StatusTaskCompletedLuarKotaPage extends StatefulWidget {
+class StatusTaskCompletedPickUpPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
 
-  const StatusTaskCompletedLuarKotaPage({
+  const StatusTaskCompletedPickUpPage({
     Key? key,
     this.status = STATUSORDER.PENDING,
     this.statusRefund = false,
@@ -31,12 +23,12 @@ class StatusTaskCompletedLuarKotaPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusTaskCompletedLuarKotaPage> createState() =>
-      _StatusTaskCompletedLuarKotaPageState();
+  State<StatusTaskCompletedPickUpPage> createState() =>
+      _StatusTaskCompletedPickUpPageState();
 }
 
-class _StatusTaskCompletedLuarKotaPageState
-    extends State<StatusTaskCompletedLuarKotaPage> {
+class _StatusTaskCompletedPickUpPageState
+    extends State<StatusTaskCompletedPickUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -323,7 +315,7 @@ class _StatusTaskCompletedLuarKotaPageState
                   ),
                   InkWell(
                     onTap: () {
-                      nextScreen(SummaryTaskDalamKotaPage());
+                      nextScreen(SummaryTaskPickUpPage());
                     },
                     child: Row(
                       children: [

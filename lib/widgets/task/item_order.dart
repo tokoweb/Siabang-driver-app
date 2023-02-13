@@ -3,10 +3,11 @@ import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/task/task_dalam_kota/detail_task_dalam_kota.dart';
-import 'package:siabang_driver_app/pages/task/task_luar_kota/detail_task_luar_kota.dart';
-import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/detail_task_pick_up.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
+
+import '../../pages/task/task_luar_kota/detail_task_luar_kota.dart';
 
 class ItemOrder extends StatefulWidget {
   final STATUSORDER statusOrder;
@@ -100,7 +101,8 @@ class _ItemOrderState extends State<ItemOrder> {
                               return Colors.orange;
                             case STATUSORDER.REJECTED:
                               return Colors.red;
-                              break;
+                            case STATUSORDER.PICKUP:
+                              return const Color(0xff08B6C1);
                           }
                         }(),
                         borderRadius: BorderRadius.circular(100),
@@ -119,6 +121,8 @@ class _ItemOrderState extends State<ItemOrder> {
                             case STATUSORDER.CANCELED:
                               return "Dibatalkan";
                             case STATUSORDER.NEWOUTOFTOWN:
+                              return 'Baru';
+                            case STATUSORDER.PICKUP:
                               return 'Baru';
                             case STATUSORDER.REJECTED:
                               return 'ditolak';
@@ -156,12 +160,14 @@ class _ItemOrderState extends State<ItemOrder> {
                       return const CompletedBody();
                     case STATUSORDER.CANCELED:
                       return const CompletedBody();
-                    case STATUSORDER.NEWOUTOFTOWN:
-                      return const NewBodyOutOfTown();
+                    case STATUSORDER.PICKUP:
+                      return const NewBodyPickUp();
                     case STATUSORDER.NEW:
                       return const NewBodyInTheTown();
                     case STATUSORDER.REJECTED:
                       return const RejectedBody();
+                    case STATUSORDER.NEWOUTOFTOWN:
+                      return const NewBodyOutOfTown();
                   }
                 }(),
               ),
@@ -428,8 +434,8 @@ class PendingBody extends StatelessWidget {
   }
 }
 
-class NewBodyOutOfTown extends StatelessWidget {
-  const NewBodyOutOfTown({super.key});
+class NewBodyPickUp extends StatelessWidget {
+  const NewBodyPickUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -449,7 +455,7 @@ class NewBodyOutOfTown extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "Pengiriman luar kota",
+                "Pengiriman dalam kota",
                 style: primaryTextStyle.copyWith(
                   fontSize: 10,
                   color: blackColor,
@@ -457,7 +463,7 @@ class NewBodyOutOfTown extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                "Jakarta",
+                "Bandung",
                 style: primaryTextStyle.copyWith(
                   fontSize: 10.sp,
                   fontWeight: semiBold,
@@ -535,7 +541,7 @@ class NewBodyOutOfTown extends StatelessWidget {
             textColor: whiteColor,
             bgColor: const Color(0xff258BD4),
             onPressed: () {
-              nextScreen(DetailTaskLuarKotaPage());
+              nextScreen(DetailTaskPickUpPage());
             },
           ),
         ),
@@ -652,6 +658,122 @@ class NewBodyInTheTown extends StatelessWidget {
             bgColor: const Color(0xff08B6C1),
             onPressed: () {
               nextScreen(DetailTaskDalamKotaPage());
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class NewBodyOutOfTown extends StatelessWidget {
+  const NewBodyOutOfTown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: screenWidth(context),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: greyColor.withOpacity(0.25),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "Pengiriman luar kota",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10,
+                  color: blackColor,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "Yogyakarta",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 10.sp,
+                  fontWeight: semiBold,
+                  color: blackColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          "Pengiriman  ke",
+          style: primaryTextStyle.copyWith(
+            fontSize: 10,
+            color: greyColor,
+          ),
+        ),
+        Text(
+          "John Doe (0812314313121)",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            fontWeight: bold,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "Bandung Kulon, Kota Bandung, Jawa Barat",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "40123",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: greyColor)),
+              child: Icon(Icons.notes_sharp, color: greyColor, size: 15),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              "Depan jalan samping indomart",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: blackColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Divider(
+          thickness: 1.5,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 40,
+          child: CustomButton(
+            margin: const EdgeInsets.only(
+              top: 30,
+            ),
+            title: 'Kirim',
+            textColor: whiteColor,
+            bgColor: const Color(0xffF49D36),
+            onPressed: () {
+              nextScreen(DetailTaskLuarKotaPage());
             },
           ),
         ),

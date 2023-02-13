@@ -15,6 +15,7 @@ const String icProfile = '${pathIcons}ic_profile.png';
 const String icProfileSelected = '${pathIcons}ic_profile_selected.png';
 const String icRp = '${pathIcons}ic_rp.png';
 const String icCar = '${pathIcons}ic_car.png';
+const String icCarRectangle = '${pathIcons}ic_car_rectangle.png';
 const String icTask = '${pathIcons}ic_task.png';
 const String icTaskSelected = '${pathIcons}ic_task_selected.png';
 const String icSim = '${pathIcons}ic_sim.png';

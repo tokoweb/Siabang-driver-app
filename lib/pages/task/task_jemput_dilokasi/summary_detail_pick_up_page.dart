@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/status_task_pick_up.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
-import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_delivery_courier.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
 import 'package:siabang_driver_app/widgets/task/item_draft_order.dart';
 import 'package:flutter/services.dart';
 
@@ -17,11 +12,11 @@ import '../../../constant/export_constant.dart';
 import '../../../constant/theme.dart';
 import '../../../widgets/task/task_page.dart';
 
-class DetailTaskLuarKotaPage extends StatefulWidget {
+class SummaryTaskPickUpPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
-  const DetailTaskLuarKotaPage({
+  const SummaryTaskPickUpPage({
     Key? key,
     this.status = STATUSORDER.CANCELED,
     this.statusdriver = STATUSDRIVER.INIT,
@@ -29,10 +24,10 @@ class DetailTaskLuarKotaPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailTaskLuarKotaPage> createState() => _DetailTaskLuarKotaPageState();
+  State<SummaryTaskPickUpPage> createState() => _SummaryTaskPickUpPageState();
 }
 
-class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
+class _SummaryTaskPickUpPageState extends State<SummaryTaskPickUpPage> {
   int itemCount = 1;
   String? armadaSelected;
 
@@ -42,7 +37,7 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
       appBar: AppBarPrimary(
         title: "Detail orderan",
         color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman luar kota • Kirim",
+        status: "Pengiriman dalam kota • Jemput di lokasi",
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -61,11 +56,11 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                       color: blackColor,
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   Text(widget.status != STATUSORDER.PENDING
                       ? "987yhE62w"
                       : "123456789123456"),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
                   GestureDetector(
                       onTap: () async {
                         await Clipboard.setData(
@@ -76,36 +71,32 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                           ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: const Duration(
+                          duration: Duration(
                             seconds: 2,
                           ),
-                          content: const Text(
+                          content: Text(
                             'Copied',
                             textAlign: TextAlign.center,
                           ),
                           backgroundColor: midnightBlue,
                         ));
                       },
-                      child: const Icon(Icons.copy, size: 16)),
+                      child: Icon(Icons.copy, size: 16)),
                 ],
               ),
               SizedBox(height: 8.h),
-              const RowText(
+              RowText(
                   text1: "Tanggal order", text2: "12 Okt 20222 - 10:32 WIB"),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.h),
-                child: const Divider(thickness: 2),
+                child: Divider(thickness: 2),
               ),
-              RowText(
-                text1: 'Alamat',
-                text2: 'Jarak kirim 3,2km',
-                textStyle1: primaryTextStyle.copyWith(
+              Text(
+                "Alamat",
+                style: primaryTextStyle.copyWith(
+                  fontSize: 14,
                   fontWeight: semiBold,
                   color: blackColor,
-                ),
-                textStyle2: primaryTextStyle.copyWith(
-                  fontSize: 12,
-                  color: greyColor,
                 ),
               ),
               const SizedBox(height: 16),
@@ -129,14 +120,13 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                           phone: "+62 1237123124",
                           address:
                               "Bandung Kulon, Kota Bandung, Jawa Barat\n40123",
-                          note: "Jalan depan indomart",
+                          note: "Depan jalan samping indomaret",
                           isEditable: false,
                           onEditTap: () {
                             nextScreen(
                                 const DataSenderIntercityPage(fromEdit: true));
                           },
                         ),
-                        const SizedBox(height: 16),
                       ],
                     ),
                   ),
@@ -147,7 +137,7 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
               ),
               Container(
                 width: screenWidth(context),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: greyColor.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(14),
@@ -159,7 +149,7 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                       textStyle1: primaryTextStyle.copyWith(
                         color: blackColor,
                       ),
-                      text2: 'Engkel Box',
+                      text2: 'Motor',
                       textStyle2: primaryTextStyle.copyWith(
                         fontWeight: semiBold,
                       ),
@@ -201,44 +191,6 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                 },
               ),
               const SizedBox(height: 16),
-              const Divider(thickness: 2),
-              const SizedBox(height: 16),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ButtonOutline(
-                      title: 'Tolak',
-                      textStyle: primaryTextStyle.copyWith(color: Colors.red),
-                      onTap: () {
-                        ModalRejectTask.show(context);
-                      },
-                      borderColor: Colors.red,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 11,
-                  ),
-                  Expanded(
-                    child: ButtonPrimary(
-                      title: 'Terima',
-                      textStyle: primaryTextStyle.copyWith(
-                        color: whiteColor,
-                      ),
-                      color: const Color(0xff27AE60),
-                      onTap: () {
-                        ModalDeliveryCourier.show(
-                          context,
-                          outOfTown: true,
-                          onTap: () {
-                            nextScreen(const StatusTaskPickUpPage());
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),

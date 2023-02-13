@@ -1,18 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/task/status_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_no_fleet.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
 
 import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class ModalDeliveryCourier {
   static Future show(BuildContext context,
-      {String? initialValue, Function()? onTap}) async {
+      {String? initialValue, Function()? onTap, bool? outOfTown}) async {
     return await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -28,6 +25,7 @@ class ModalDeliveryCourier {
         return DeliveryCourierModalView(
           initialValue: initialValue,
           onTap: onTap,
+          outOfTown: outOfTown,
         );
       },
     );
@@ -37,8 +35,10 @@ class ModalDeliveryCourier {
 class DeliveryCourierModalView extends StatefulWidget {
   final String? initialValue;
   final Function()? onTap;
+  final bool? outOfTown;
 
-  DeliveryCourierModalView({Key? key, this.initialValue, this.onTap})
+  DeliveryCourierModalView(
+      {Key? key, this.initialValue, this.onTap, this.outOfTown})
       : super(key: key);
 
   @override
@@ -48,6 +48,7 @@ class DeliveryCourierModalView extends StatefulWidget {
 
 class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   TextEditingController queryController = TextEditingController();
+  bool? outOfTown;
   Function()? onTap;
   String? value;
   List<Map<String, dynamic>> _couriers = [
@@ -68,6 +69,26 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
       "transportation_type": "Motor",
     },
   ];
+
+  List<Map<String, dynamic>> _couriersBox = [
+    {
+      "id": "D 1939 YU",
+      "transportation_type": "Engkel box",
+    },
+    {
+      "id": "D 1139 YU",
+      "transportation_type": "Engkel box",
+    },
+    {
+      "id": "D 1929 YU",
+      "transportation_type": "Engkel box",
+    },
+    {
+      "id": "D 1339 YU",
+      "transportation_type": "Engkel box",
+    },
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -78,119 +99,228 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenHeight(context) * 0.55,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+        height: screenHeight(context) * 0.55,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 50,
-                height: 5,
-                decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.all(Radius.circular(12.0))),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Text(
-            "Pilih armada",
-            style: primaryTextStyle.copyWith(
-              fontWeight: bold,
-              color: blackColor,
-            ),
-          ),
-          SizedBox(height: 16),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child: Column(
+        child: outOfTown == false
+            ? Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ..._couriers.map((e) {
-                    return ListTile(
-                      title: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 50,
+                        height: 5,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Pilih armada",
+                    style: primaryTextStyle.copyWith(
+                      fontWeight: bold,
+                      color: blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            width: 34,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  icVehicle,
-                                ),
-                                fit: BoxFit.cover,
+                          ..._couriers.map((e) {
+                            return ListTile(
+                              title: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 34,
+                                    height: 34,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          icVehicle,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 14,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${e['id']}",
+                                        style: primaryTextStyle.copyWith(
+                                          fontSize: 14,
+                                          color: blackColor,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${e['transportation_type']}",
+                                        style: primaryTextStyle.copyWith(
+                                          fontSize: 11,
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 14,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${e['id']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 14,
-                                  color: blackColor,
-                                ),
+                              onTap: () {
+                                value = e['id'];
+                                setState(() {});
+                              },
+                              trailing: Radio(
+                                groupValue: value,
+                                activeColor: midnightBlue,
+                                value: e['id'] as String,
+                                onChanged: (String? val) {
+                                  value = val ?? "";
+                                  setState(() {
+                                    ModalNoFleet.show(context);
+                                  });
+                                },
                               ),
-                              Text(
-                                "${e['transportation_type']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 11,
-                                  color: greyColor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                            ],
-                          ),
+                            );
+                          }).toList()
                         ],
                       ),
-                      onTap: () {
-                        value = e['id'];
-                        setState(() {});
-                      },
-                      trailing: Radio(
-                        groupValue: value,
-                        activeColor: midnightBlue,
-                        value: e['id'] as String,
-                        onChanged: (String? val) {
-                          value = val ?? "";
-                          setState(() {
-                            ModalNoFleet.show(context);
-                          });
-                        },
-                      ),
-                    );
-                  }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(16),
+                    child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                 ],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(16),
-            child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-        ],
-      ),
-    );
+              )
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 50,
+                        height: 5,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Pilih armada",
+                    style: primaryTextStyle.copyWith(
+                      fontWeight: bold,
+                      color: blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ..._couriersBox.map((e) {
+                            return ListTile(
+                              title: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 34,
+                                    height: 34,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          icCarRectangle,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 14,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${e['id']}",
+                                        style: primaryTextStyle.copyWith(
+                                          fontSize: 14,
+                                          color: blackColor,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${e['transportation_type']}",
+                                        style: primaryTextStyle.copyWith(
+                                          fontSize: 11,
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                value = e['id'];
+                                setState(() {});
+                              },
+                              trailing: Radio(
+                                groupValue: value,
+                                activeColor: midnightBlue,
+                                value: e['id'] as String,
+                                onChanged: (String? val) {
+                                  value = val ?? "";
+                                  setState(() {
+                                    ModalNoFleet.show(context);
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList()
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(16),
+                    child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ));
   }
 }

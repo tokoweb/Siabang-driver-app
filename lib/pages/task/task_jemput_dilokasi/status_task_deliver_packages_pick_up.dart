@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
 import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/pages/task/task_luar_kota/status_task_deliver_packages_luar_kota.dart';
+import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/status_task_completed_pick_up.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
@@ -16,12 +17,12 @@ import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
-class StatusTaskLuarKotaPage extends StatefulWidget {
+class StatusTaskDeliverPackagesPickUpPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
 
-  const StatusTaskLuarKotaPage({
+  const StatusTaskDeliverPackagesPickUpPage({
     Key? key,
     this.status = STATUSORDER.PENDING,
     this.statusRefund = false,
@@ -29,10 +30,12 @@ class StatusTaskLuarKotaPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusTaskLuarKotaPage> createState() => _StatusTaskLuarKotaPageState();
+  State<StatusTaskDeliverPackagesPickUpPage> createState() =>
+      _StatusTaskDeliverPackagesPickUpPageState();
 }
 
-class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
+class _StatusTaskDeliverPackagesPickUpPageState
+    extends State<StatusTaskDeliverPackagesPickUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,13 +121,132 @@ class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.circle_outlined, color: crimsonColor, size: 15),
+                  Column(
+                    children: [
+                      Icon(Icons.circle_outlined,
+                          color: crimsonColor, size: 15),
+                      Image.asset(
+                        icDivider,
+                        height: screenHeight(context) / 2.3,
+                      ),
+                      Icon(
+                        Icons.circle,
+                        color: Color(0xff27AE60),
+                        size: 15,
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     width: 10,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        'Antar paket ke gerai',
+                        style: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      Text(
+                        'Gerai Siabang Dipatiukur',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Bandung Kulon, Kota Bandung, Jawa Barat\n40123',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: 350,
+                        child: ButtonPrimary(
+                          color: Color(0xffE4E6EF),
+                          title: 'Lihat arah lokasi',
+                          onTap: () {},
+                          icon: Container(
+                            width: 18,
+                            height: 18,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(icLocation),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Upload foto bukti paket sudah diterima',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 13,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Text(
                         'Jemput paket di lokasi pengirim',
                         style: primaryTextStyle.copyWith(
@@ -172,113 +294,105 @@ class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 24,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ButtonPrimary(
-                            color: Color(0xffE4E6EF),
-                            title: 'Kontak pengirim',
-                            onTap: () {},
-                            icon: Container(
-                              width: 18,
-                              height: 18,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(icPhone),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: ButtonPrimary(
-                            color: Color(0xffE4E6EF),
-                            title: 'Lihat arah lokasi',
-                            onTap: () {},
-                            icon: Container(
-                              width: 18,
-                              height: 18,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(icLocation),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Upload foto bukti penjemputan paket',
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 13,
-                        color: blackColor,
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 95,
-                    height: 95,
-                    child: DataPhoto(
-                      onTap: () {
-                        ModalImagePicker.show(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    width: 95,
-                    height: 95,
-                    child: DataPhoto(
-                      onTap: () {
-                        ModalImagePicker.show(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    width: 95,
-                    height: 95,
-                    child: DataPhoto(
-                      onTap: () {
-                        ModalImagePicker.show(context);
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
+                      Row(
+                        children: [
+                          Container(
+                            width: 170,
+                            child: ButtonPrimary(
+                              color: Color(0xffE4E6EF),
+                              title: 'Kontak pengirim',
+                              onTap: () {},
+                              icon: Container(
+                                width: 18,
+                                height: 18,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(icPhone),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 170,
+                            child: ButtonPrimary(
+                              color: Color(0xffE4E6EF),
+                              title: 'Lihat arah lokasi',
+                              onTap: () {},
+                              icon: Container(
+                                width: 18,
+                                height: 18,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(icLocation),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Upload foto bukti penjemputan paket',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 13,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 95,
+                            height: 95,
+                            child: DataPhoto(
+                              onTap: () {
+                                ModalImagePicker.show(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -306,6 +420,32 @@ class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
                                 color: blackColor,
                               ),
                               text2: 'Motor',
+                              textStyle2: primaryTextStyle.copyWith(
+                                fontWeight: semiBold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 14,
+                            ),
+                            RowText(
+                              text1: 'Metode pembayaran',
+                              textStyle1: primaryTextStyle.copyWith(
+                                color: blackColor,
+                              ),
+                              text2: 'Tunai (COD)',
+                              textStyle2: primaryTextStyle.copyWith(
+                                fontWeight: semiBold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 14,
+                            ),
+                            RowText(
+                              text1: 'Total pembayaran',
+                              textStyle1: primaryTextStyle.copyWith(
+                                color: blackColor,
+                              ),
+                              text2: 'Rp 90.000',
                               textStyle2: primaryTextStyle.copyWith(
                                 fontWeight: semiBold,
                               ),
@@ -371,9 +511,15 @@ class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
                       ),
                       Expanded(
                           child: ButtonPrimary(
-                        title: 'Lanjutkan',
+                        title: 'Selesai',
                         onTap: () {
-                          nextScreen(StatusTaskDeliverPackagesLuarKotaPage());
+                          nextScreen(SuccessfulDelivery(
+                            onTap: () {
+                              nextScreen(
+                                StatusTaskCompletedPickUpPage(),
+                              );
+                            },
+                          ));
                         },
                       )),
                     ],

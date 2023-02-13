@@ -27,12 +27,9 @@ class _HomePageState extends State<HomePage> {
   bool? onClick;
   List<STATUSORDER> items = [
     STATUSORDER.NEW,
-    STATUSORDER.ONPROGRESS,
+    STATUSORDER.PICKUP,
     STATUSORDER.NEWOUTOFTOWN,
     STATUSORDER.COMPlETED,
-    STATUSORDER.ONPROGRESS,
-    STATUSORDER.REJECTED,
-    STATUSORDER.CANCELED,
   ];
 
   Widget buttonUangCod() {
