@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/task/status_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_no_fleet.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
 
 import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class ModalDeliveryCourier {
-  static Future show(BuildContext context, {String? initialValue}) async {
+  static Future show(BuildContext context,
+      {String? initialValue, Function()? onTap}) async {
     return await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -22,7 +25,10 @@ class ModalDeliveryCourier {
       enableDrag: true,
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return DeliveryCourierModalView(initialValue: initialValue);
+        return DeliveryCourierModalView(
+          initialValue: initialValue,
+          onTap: onTap,
+        );
       },
     );
   }
@@ -30,7 +36,9 @@ class ModalDeliveryCourier {
 
 class DeliveryCourierModalView extends StatefulWidget {
   final String? initialValue;
-  const DeliveryCourierModalView({Key? key, this.initialValue})
+  final Function()? onTap;
+
+  DeliveryCourierModalView({Key? key, this.initialValue, this.onTap})
       : super(key: key);
 
   @override
@@ -40,6 +48,7 @@ class DeliveryCourierModalView extends StatefulWidget {
 
 class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   TextEditingController queryController = TextEditingController();
+  Function()? onTap;
   String? value;
   List<Map<String, dynamic>> _couriers = [
     {
@@ -63,6 +72,7 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   void initState() {
     super.initState();
     value = widget.initialValue;
+    onTap = widget.onTap;
   }
 
   @override
@@ -161,7 +171,9 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
                         value: e['id'] as String,
                         onChanged: (String? val) {
                           value = val ?? "";
-                          setState(() {});
+                          setState(() {
+                            ModalNoFleet.show(context);
+                          });
                         },
                       ),
                     );
@@ -172,12 +184,7 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
           ),
           Container(
             margin: EdgeInsets.all(16),
-            child: ButtonPrimary(
-              title: "Pilih",
-              onTap: () {
-                nextScreen(StatusOrderPage());
-              },
-            ),
+            child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
           ),
           SizedBox(
             height: 30,

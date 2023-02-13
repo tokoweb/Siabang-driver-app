@@ -9,7 +9,8 @@ import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import '../../constant/theme.dart';
 
 class SuccessfulDelivery extends StatelessWidget {
-  const SuccessfulDelivery({Key? key}) : super(key: key);
+  SuccessfulDelivery({Key? key, this.onTap}) : super(key: key);
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +56,7 @@ class SuccessfulDelivery extends StatelessWidget {
                   Expanded(
                     child: ButtonPrimary(
                       title: "Lihat status",
-                      onTap: () {
-                        backScreenUntil();
-                        nextScreen(
-                            StatusOrderPage(status: STATUSORDER.ONPROGRESS));
-                      },
+                      onTap: onTap ?? () {},
                     ),
                   ),
                 ],

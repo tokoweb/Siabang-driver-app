@@ -398,9 +398,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return ItemOrder(
                     statusOrder: items[index],
-                    onTap: () {
-                      nextScreen(DetailOrderPage());
-                    },
+                    onTap: () {},
                   );
                 },
                 shrinkWrap: true,

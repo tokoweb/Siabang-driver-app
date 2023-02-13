@@ -62,13 +62,14 @@ class ButtonPrimary extends StatelessWidget {
             alignment: alignment ?? Alignment.center,
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (icon != null && isTrailingIcon == false)
                   Row(
                     children: [
                       icon!,
                       const SizedBox(
-                        width: 13,
+                        width: 5,
                       ),
                     ],
                   )

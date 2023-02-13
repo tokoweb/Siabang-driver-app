@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
+import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_dalam_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_receiver_intercity_page.dart';
@@ -10,18 +11,19 @@ import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_delivery_courier.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_stop_work.dart';
 import 'package:siabang_driver_app/widgets/task/item_draft_order.dart';
 import 'package:flutter/services.dart';
 
 import '../../../constant/export_constant.dart';
-import '../../constant/theme.dart';
-import '../../widgets/task/task_page.dart';
+import '../../../constant/theme.dart';
+import '../../../widgets/task/task_page.dart';
 
-class DetailOrderPage extends StatefulWidget {
+class StatusDetailTaskRejectedPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
-  const DetailOrderPage({
+  const StatusDetailTaskRejectedPage({
     Key? key,
     this.status = STATUSORDER.CANCELED,
     this.statusdriver = STATUSDRIVER.INIT,
@@ -29,10 +31,12 @@ class DetailOrderPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailOrderPage> createState() => _DetailOrderPageState();
+  State<StatusDetailTaskRejectedPage> createState() =>
+      _StatusDetailTaskRejectedPageState();
 }
 
-class _DetailOrderPageState extends State<DetailOrderPage> {
+class _StatusDetailTaskRejectedPageState
+    extends State<StatusDetailTaskRejectedPage> {
   int itemCount = 1;
   String? armadaSelected;
 
@@ -40,16 +44,21 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarPrimary(
+        onBack: () {
+          backScreenUntil();
+        },
         title: "Detail orderan",
+        color: Theme.of(context).scaffoldBackgroundColor,
+        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFF08B6C1),
+              color: crimsonColor,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Text(
-              "Baru",
+              "ditolak",
               style: primaryTextStyle.copyWith(
                 fontSize: 12,
                 color: whiteColor,
@@ -57,8 +66,6 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
             ),
           ),
         ],
-        color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -257,38 +264,6 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                 },
               ),
               const SizedBox(height: 16),
-              const Divider(thickness: 2),
-              const SizedBox(height: 16),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ButtonOutline(
-                      title: 'Tolak',
-                      textStyle: primaryTextStyle.copyWith(color: Colors.red),
-                      onTap: () {
-                        ModalRejectTask.show(context);
-                      },
-                      borderColor: Colors.red,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 11,
-                  ),
-                  Expanded(
-                    child: ButtonPrimary(
-                      title: 'Terima',
-                      textStyle: primaryTextStyle.copyWith(
-                        color: whiteColor,
-                      ),
-                      color: Color(0xff27AE60),
-                      onTap: () {
-                        ModalDeliveryCourier.show(context);
-                      },
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),

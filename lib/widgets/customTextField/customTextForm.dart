@@ -61,6 +61,7 @@ class CustomTextField extends StatelessWidget {
               contentPadding: EdgeInsets.only(
                 left: 20,
                 top: 10,
+                bottom: 10,
               ),
             ),
             validator: (value) {

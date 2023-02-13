@@ -1,33 +1,29 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
+import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
 import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/pages/task/detail_status_page.dart';
+import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_deliver_packages_dalam_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_canceled_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_completed_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_shiped_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_unpaid_order_widget.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
-class StatusOrderPage extends StatefulWidget {
+class StatusTaskDalamKotaPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
 
-  const StatusOrderPage({
+  const StatusTaskDalamKotaPage({
     Key? key,
     this.status = STATUSORDER.PENDING,
     this.statusRefund = false,
@@ -35,10 +31,11 @@ class StatusOrderPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusOrderPage> createState() => _StatusOrderPageState();
+  State<StatusTaskDalamKotaPage> createState() =>
+      _StatusTaskDalamKotaPageState();
 }
 
-class _StatusOrderPageState extends State<StatusOrderPage> {
+class _StatusTaskDalamKotaPageState extends State<StatusTaskDalamKotaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +65,9 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
         child: Container(
           margin: EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
               Row(
                 children: [
                   Text(
@@ -116,61 +114,184 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                 margin: EdgeInsets.symmetric(vertical: 10.h),
                 child: Divider(thickness: 2),
               ),
-              Column(
+              SizedBox(
+                height: 10,
+              ),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Alamat",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 14.sp,
-                      color: blackColor,
-                      fontWeight: semiBold,
-                    ),
+                  Icon(Icons.circle_outlined, color: crimsonColor, size: 15),
+                  SizedBox(
+                    width: 10,
                   ),
-                  const SizedBox(height: 16),
-                  Row(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          const SizedBox(height: 16),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                          Image.asset(
-                            icDividerVert,
-                            height: screenWidth(context) / 2,
-                          ),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ItemAddressOrderPage(
-                              title: "Penjemputan dari",
-                              name: "John Doe",
-                              phone: "+62 1237123124",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              note: "Jalan depan indomart",
-                              onEditTap: () {},
-                            ),
-                            const SizedBox(height: 16),
-                            ItemAddressOrderPage(
-                              title: "Pengiriman ke",
-                              name: "Jane Doe",
-                              phone: "+62 12312412",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              onEditTap: () {},
-                            ),
-                          ],
+                      Text(
+                        'Jemput paket di lokasi pengirim',
+                        style: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          color: blackColor,
                         ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      Text(
+                        'John Doe (081234567890)',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Bandung Kulon, Kota Bandung, Jawa Barat\n40123',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(icNote),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            'Depan jalan samping indomart',
+                            style: primaryTextStyle.copyWith(
+                              fontSize: 12,
+                              color: blackColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ButtonPrimary(
+                            color: Color(0xffE4E6EF),
+                            title: 'Kontak pengirim',
+                            onTap: () {},
+                            icon: Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(icPhone),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: ButtonPrimary(
+                            color: Color(0xffE4E6EF),
+                            title: 'Lihat arah lokasi',
+                            onTap: () {},
+                            icon: Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(icLocation),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Upload foto bukti penjemputan paket',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 13,
+                        color: blackColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                child: Divider(thickness: 2),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   ...[
                     Container(
                       child: Container(
@@ -279,9 +400,9 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                       ),
                       Expanded(
                           child: ButtonPrimary(
-                        title: 'Selesai',
+                        title: 'Lanjutkan',
                         onTap: () {
-                          nextScreen(SuccessfulDelivery());
+                          nextScreen(StatusTaskDeliverPackagesDalamKotaPage());
                         },
                       )),
                     ],

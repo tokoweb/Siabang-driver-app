@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
+import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/pages/task/task_dalam_kota/detail_task_dalam_kota.dart';
+import 'package:siabang_driver_app/pages/task/task_luar_kota/detail_task_luar_kota.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
@@ -525,13 +528,16 @@ class NewBodyOutOfTown extends StatelessWidget {
         Container(
           height: 40,
           child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Jemput di lokasi',
-              textColor: whiteColor,
-              bgColor: const Color(0xff258BD4),
-              onPressed: () {}),
+            margin: const EdgeInsets.only(
+              top: 30,
+            ),
+            title: 'Jemput di lokasi',
+            textColor: whiteColor,
+            bgColor: const Color(0xff258BD4),
+            onPressed: () {
+              nextScreen(DetailTaskLuarKotaPage());
+            },
+          ),
         ),
       ],
     );
@@ -638,13 +644,16 @@ class NewBodyInTheTown extends StatelessWidget {
         Container(
           height: 40,
           child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Jemput di lokasi & kirim',
-              textColor: whiteColor,
-              bgColor: const Color(0xff08B6C1),
-              onPressed: () {}),
+            margin: const EdgeInsets.only(
+              top: 30,
+            ),
+            title: 'Jemput di lokasi & kirim',
+            textColor: whiteColor,
+            bgColor: const Color(0xff08B6C1),
+            onPressed: () {
+              nextScreen(DetailTaskDalamKotaPage());
+            },
+          ),
         ),
       ],
     );

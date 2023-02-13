@@ -1,33 +1,29 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
+import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
 import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/pages/task/detail_status_page.dart';
+import 'package:siabang_driver_app/pages/task/task_dalam_kota/summary_detail_page.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_canceled_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_completed_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_shiped_order_widget.dart';
-import 'package:siabang_driver_app/pages/task/widget/status_unpaid_order_widget.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
-class StatusOrderPage extends StatefulWidget {
+class StatusTaskCompletedPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
 
-  const StatusOrderPage({
+  const StatusTaskCompletedPage({
     Key? key,
     this.status = STATUSORDER.PENDING,
     this.statusRefund = false,
@@ -35,14 +31,18 @@ class StatusOrderPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusOrderPage> createState() => _StatusOrderPageState();
+  State<StatusTaskCompletedPage> createState() =>
+      _StatusTaskCompletedPageState();
 }
 
-class _StatusOrderPageState extends State<StatusOrderPage> {
+class _StatusTaskCompletedPageState extends State<StatusTaskCompletedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarPrimary(
+        onBack: () {
+          backScreenUntil();
+        },
         title: "Status orderan",
         color: Theme.of(context).scaffoldBackgroundColor,
         status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
@@ -50,11 +50,11 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             decoration: BoxDecoration(
-              color: Color(0xff258BD4),
+              color: Color(0xff27AE60),
               borderRadius: BorderRadius.circular(100),
             ),
             child: Text(
-              "Berlangsung",
+              "Selesai",
               style: primaryTextStyle.copyWith(
                 fontSize: 12,
                 color: whiteColor,
@@ -68,8 +68,9 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
         child: Container(
           margin: EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
               Row(
                 children: [
                   Text(
@@ -116,61 +117,193 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                 margin: EdgeInsets.symmetric(vertical: 10.h),
                 child: Divider(thickness: 2),
               ),
-              Column(
+              SizedBox(
+                height: 10,
+              ),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Alamat",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 14.sp,
-                      color: blackColor,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          const SizedBox(height: 16),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                          Image.asset(
-                            icDividerVert,
-                            height: screenWidth(context) / 2,
-                          ),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                        ],
+                      Icon(Icons.circle, color: Color(0xff27AE60), size: 15),
+                      Image.asset(
+                        icDividerGreen,
+                        height: screenHeight(context) / 2.9,
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ItemAddressOrderPage(
-                              title: "Penjemputan dari",
-                              name: "John Doe",
-                              phone: "+62 1237123124",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              note: "Jalan depan indomart",
-                              onEditTap: () {},
-                            ),
-                            const SizedBox(height: 16),
-                            ItemAddressOrderPage(
-                              title: "Pengiriman ke",
-                              name: "Jane Doe",
-                              phone: "+62 12312412",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              onEditTap: () {},
-                            ),
-                          ],
-                        ),
+                      Icon(
+                        Icons.circle,
+                        color: Color(0xff27AE60),
+                        size: 15,
                       ),
                     ],
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Antar paket ke lokasi penerima',
+                        style: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      Text(
+                        'John Doe (081234567890)',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Bandung Kulon, Kota Bandung, Jawa Barat\n40123',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(icNote),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            'Depan jalan samping indomart',
+                            style: primaryTextStyle.copyWith(
+                              fontSize: 12,
+                              color: blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Foto bukti paket sudah diterima',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 13,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [1, 2, 3].map((e) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 8),
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: midnightBlue,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'Antar paket ke lokasi penerima',
+                        style: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      Text(
+                        'John Doe (081234567890)',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Bandung Kulon, Kota Bandung, Jawa Barat\n40123',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(icNote),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            'Depan jalan samping indomart',
+                            style: primaryTextStyle.copyWith(
+                              fontSize: 12,
+                              color: blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Foto bukti penjemputan paket',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 13,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [1, 2, 3].map((e) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 8),
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: midnightBlue,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                child: Divider(thickness: 2),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   ...[
                     Container(
                       child: Container(
@@ -234,7 +367,7 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                   ),
                   InkWell(
                     onTap: () {
-                      nextScreen(DetailOrderPage());
+                      nextScreen(SummaryTaskDalamKotaPage());
                     },
                     child: Row(
                       children: [
@@ -262,31 +395,10 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: ButtonOutline(
-                        title: 'Pending',
-                        onTap: () {
-                          ModalPending.show(context);
-                        },
-                      )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                          child: ButtonPrimary(
-                        title: 'Selesai',
-                        onTap: () {
-                          nextScreen(SuccessfulDelivery());
-                        },
-                      )),
-                    ],
-                  ),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
             ],
           ),

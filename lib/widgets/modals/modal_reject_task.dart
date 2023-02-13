@@ -3,7 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
+import 'package:siabang_driver_app/pages/task/detail_status_task_reject.dart';
 import 'package:siabang_driver_app/pages/task/status_order_page.dart';
+import 'package:siabang_driver_app/pages/task/status_task_pending_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextField.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextForm.dart';
@@ -64,7 +67,7 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenHeight(context) * 0.50,
+      height: screenHeight(context) * 0.75,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -124,15 +127,7 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
                         value: e['desc'] as String,
                         onChanged: (String? val) {
                           value = val ?? "";
-                          setState(() {
-                            Center(
-                              child: Container(
-                                child: Text(
-                                  'Halo Pramudia',
-                                ),
-                              ),
-                            );
-                          });
+                          setState(() {});
                         },
                       ),
                       title: Text(
@@ -143,11 +138,68 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
                         ),
                       ),
                       onTap: () {
-                        value = e['desc'];
+                        value = e['Lainnya'];
                         setState(() {});
                       },
                     );
                   }).toList(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: CustomTextField(
+                      title: 'Deskripsi',
+                      hintText: 'Deskripsi',
+                      maxLines: 4,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20.0,
+                      right: 20.0,
+                      top: 16,
+                    ),
+                    child: Text(
+                      'Upload foto bukti',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: light,
+                        color: spaceCadet.withOpacity(0.4),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Row(
+                      children: [
+                        DataPhoto(
+                          onTap: () {},
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DataPhoto(
+                          onTap: () {},
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DataPhoto(
+                          onTap: () {},
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -157,7 +209,12 @@ class _DeliveryRejectTaskViewState extends State<DeliveryRejectTaskView> {
             child: ButtonPrimary(
               title: "Kirim",
               onTap: () {
-                TaskOptionDialog.show(title: 'Penolakan tugas telah\ndikirim');
+                TaskOptionDialog.show(
+                  title: 'Penolakan tugas telah\ndikirim',
+                  route: () {
+                    nextScreen(StatusDetailTaskRejectedPage());
+                  },
+                );
               },
             ),
           ),

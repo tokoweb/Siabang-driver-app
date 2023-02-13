@@ -14,13 +14,15 @@ class TaskOptionDialog {
   static Future show({
     String? title,
     String? body,
+    final Function()? route,
   }) async {
     return showDialog(
       context: NavKey.navKey.currentState!.context,
       builder: (BuildContext builderContext) {
-        Timer(Duration(milliseconds: 1500), () {
-          backScreenUntil();
-        });
+        Timer(
+          Duration(milliseconds: 1500),
+          route ?? () {},
+        );
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
@@ -38,7 +40,7 @@ class TaskOptionDialog {
 class TaskOptionDialogView extends StatelessWidget {
   final String? title, body;
 
-  const TaskOptionDialogView({
+  TaskOptionDialogView({
     Key? key,
     this.title,
     this.body,

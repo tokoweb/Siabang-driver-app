@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/pages/task/status_order_page.dart';
+import 'package:siabang_driver_app/pages/task/status_task_pending_page.dart';
+import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_completed.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextField.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextForm.dart';
@@ -172,7 +174,11 @@ class _DeliveryPendingTaskViewState extends State<DeliveryPendingTaskView> {
                         title: "Kirim",
                         onTap: () {
                           TaskOptionDialog.show(
-                              title: 'Konfirmasi pending\ntelah dikirim');
+                            title: 'Konfirmasi pending\ntelah dikirim',
+                            route: () {
+                              nextScreen(StatusTaskPendingPage());
+                            },
+                          );
                         },
                       ),
                     ),

@@ -83,10 +83,14 @@ class UangCodPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            DataPhoto(
-              onTap: () {
-                ModalImagePicker.show(context);
-              },
+            Container(
+              width: 102,
+              height: 102,
+              child: DataPhoto(
+                onTap: () {
+                  ModalImagePicker.show(context);
+                },
+              ),
             ),
             Spacer(),
             CustomButton(

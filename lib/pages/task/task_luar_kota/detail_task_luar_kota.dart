@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
+import 'package:siabang_driver_app/pages/task/task_luar_kota/status_task_luar_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
-import 'package:siabang_driver_app/pages/services/service_intercity/data_receiver_intercity_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
@@ -14,14 +14,14 @@ import 'package:siabang_driver_app/widgets/task/item_draft_order.dart';
 import 'package:flutter/services.dart';
 
 import '../../../constant/export_constant.dart';
-import '../../constant/theme.dart';
-import '../../widgets/task/task_page.dart';
+import '../../../constant/theme.dart';
+import '../../../widgets/task/task_page.dart';
 
-class DetailOrderPage extends StatefulWidget {
+class DetailTaskLuarKotaPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
-  const DetailOrderPage({
+  const DetailTaskLuarKotaPage({
     Key? key,
     this.status = STATUSORDER.CANCELED,
     this.statusdriver = STATUSDRIVER.INIT,
@@ -29,10 +29,10 @@ class DetailOrderPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailOrderPage> createState() => _DetailOrderPageState();
+  State<DetailTaskLuarKotaPage> createState() => _DetailTaskLuarKotaPageState();
 }
 
-class _DetailOrderPageState extends State<DetailOrderPage> {
+class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
   int itemCount = 1;
   String? armadaSelected;
 
@@ -58,7 +58,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
           ),
         ],
         color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
+        status: "Pengiriman luar kota • Jemput di lokasi",
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -129,12 +129,6 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                       const SizedBox(height: 16),
                       Icon(Icons.circle_outlined,
                           color: crimsonColor, size: 20),
-                      Image.asset(
-                        icDividerVert,
-                        height: screenWidth(context) / 2,
-                      ),
-                      Icon(Icons.circle_outlined,
-                          color: crimsonColor, size: 20),
                     ],
                   ),
                   const SizedBox(width: 10),
@@ -155,18 +149,6 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        ItemAddressOrderPage(
-                          title: "Pengiriman ke",
-                          name: "Jane Doe",
-                          phone: "+62 12312412",
-                          address:
-                              "Bandung Kulon, Kota Bandung, Jawa Barat\n40123",
-                          isEditable: false,
-                          onEditTap: () {
-                            nextScreen(const DataReceiverIntercityPage(
-                                fromEdit: true));
-                          },
-                        ),
                       ],
                     ),
                   ),
@@ -190,32 +172,6 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                         color: blackColor,
                       ),
                       text2: 'Motor',
-                      textStyle2: primaryTextStyle.copyWith(
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 14,
-                    ),
-                    RowText(
-                      text1: 'Metode pembayaran',
-                      textStyle1: primaryTextStyle.copyWith(
-                        color: blackColor,
-                      ),
-                      text2: 'Tunai (COD)',
-                      textStyle2: primaryTextStyle.copyWith(
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 14,
-                    ),
-                    RowText(
-                      text1: 'Total pembayaran',
-                      textStyle1: primaryTextStyle.copyWith(
-                        color: blackColor,
-                      ),
-                      text2: 'Rp 90.000',
                       textStyle2: primaryTextStyle.copyWith(
                         fontWeight: semiBold,
                       ),
@@ -283,7 +239,12 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                       ),
                       color: Color(0xff27AE60),
                       onTap: () {
-                        ModalDeliveryCourier.show(context);
+                        ModalDeliveryCourier.show(
+                          context,
+                          onTap: () {
+                            nextScreen(StatusTaskLuarKotaPage());
+                          },
+                        );
                       },
                     ),
                   ),
