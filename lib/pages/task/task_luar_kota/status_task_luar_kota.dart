@@ -5,22 +5,24 @@ import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
+import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
 import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
+import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/summary_detail_pick_up_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
-class StatusOrderPage extends StatefulWidget {
+class StatusTaskLuarKotaPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
 
-  const StatusOrderPage({
+  const StatusTaskLuarKotaPage({
     Key? key,
     this.status = STATUSORDER.PENDING,
     this.statusRefund = false,
@@ -28,17 +30,17 @@ class StatusOrderPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusOrderPage> createState() => _StatusOrderPageState();
+  State<StatusTaskLuarKotaPage> createState() => _StatusTaskLuarKotaPageState();
 }
 
-class _StatusOrderPageState extends State<StatusOrderPage> {
+class _StatusTaskLuarKotaPageState extends State<StatusTaskLuarKotaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarPrimary(
         title: "Status orderan",
         color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
+        status: "Pengiriman dalam kota • Kirim",
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -61,8 +63,9 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
         child: Container(
           margin: EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
               Row(
                 children: [
                   Text(
@@ -110,61 +113,158 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                 margin: EdgeInsets.symmetric(vertical: 10.h),
                 child: Divider(thickness: 2),
               ),
-              Column(
+              SizedBox(
+                height: 10,
+              ),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Alamat",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 14.sp,
-                      color: blackColor,
-                      fontWeight: semiBold,
-                    ),
+                  Icon(Icons.circle_outlined, color: crimsonColor, size: 15),
+                  SizedBox(
+                    width: 10,
                   ),
-                  const SizedBox(height: 16),
-                  Row(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          const SizedBox(height: 16),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                          Image.asset(
-                            icDividerVert,
-                            height: screenWidth(context) / 2,
-                          ),
-                          Icon(Icons.circle_outlined,
-                              color: crimsonColor, size: 20),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ItemAddressOrderPage(
-                              title: "Penjemputan dari",
-                              name: "John Doe",
-                              phone: "+62 1237123124",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              note: "Jalan depan indomart",
-                              onEditTap: () {},
-                            ),
-                            const SizedBox(height: 16),
-                            ItemAddressOrderPage(
-                              title: "Pengiriman ke",
-                              name: "Jane Doe",
-                              phone: "+62 12312412",
-                              address:
-                                  "Bandung Kulon, Kota Bandung, Jawa Barat 40123",
-                              onEditTap: () {},
-                            ),
-                          ],
+                      Text(
+                        'Pengiriman paket ke gudang',
+                        style: primaryTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          color: blackColor,
                         ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      Text(
+                        'Gudang Siabang Margahayu',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Bandung Kulon, Kota Bandung, Jawa Barat\n40123',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: blackColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
                       ),
                     ],
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ButtonPrimary(
+                            color: Color(0xffE4E6EF),
+                            title: 'Lihat arah lokasi',
+                            onTap: () {},
+                            icon: Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(icLocation),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Upload foto bukti paket sudah sampai di gudang',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 13,
+                        color: blackColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                    width: 95,
+                    height: 95,
+                    child: DataPhoto(
+                      onTap: () {
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.h),
+                child: Divider(thickness: 2),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   ...[
                     // ignore: avoid_unnecessary_containers
                     Container(
@@ -182,33 +282,7 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                               textStyle1: primaryTextStyle.copyWith(
                                 color: blackColor,
                               ),
-                              text2: 'Motor',
-                              textStyle2: primaryTextStyle.copyWith(
-                                fontWeight: semiBold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 14,
-                            ),
-                            RowText(
-                              text1: 'Metode pembayaran',
-                              textStyle1: primaryTextStyle.copyWith(
-                                color: blackColor,
-                              ),
-                              text2: 'Tunai (COD)',
-                              textStyle2: primaryTextStyle.copyWith(
-                                fontWeight: semiBold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 14,
-                            ),
-                            RowText(
-                              text1: 'Total pembayaran',
-                              textStyle1: primaryTextStyle.copyWith(
-                                color: blackColor,
-                              ),
-                              text2: 'Rp 90.000',
+                              text2: 'Engkel Box',
                               textStyle2: primaryTextStyle.copyWith(
                                 fontWeight: semiBold,
                               ),
@@ -244,7 +318,7 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                               ),
                             ),
                             Text(
-                              "Pengiriman dalam kota",
+                              "Pengiriman luar kota",
                               style: primaryTextStyle.copyWith(
                                 fontSize: 11,
                                 color: greyColor,
@@ -276,7 +350,11 @@ class _StatusOrderPageState extends State<StatusOrderPage> {
                           child: ButtonPrimary(
                         title: 'Selesai',
                         onTap: () {
-                          nextScreen(SuccessfulDelivery());
+                          nextScreen(SuccessfulDelivery(
+                            onTap: () {
+                              nextScreen(SummaryTaskPickUpPage());
+                            },
+                          ));
                         },
                       )),
                     ],

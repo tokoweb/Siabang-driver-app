@@ -3,16 +3,12 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:siabang_driver_app/domain/commons/nav_key.dart';
 import 'package:siabang_driver_app/pages/main_view_provider.dart';
-import 'package:siabang_driver_app/pages/main_view_provider.dart';
 import 'package:siabang_driver_app/pages/splash_page.dart';
-
-import 'domain/commons/nav_key.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +23,10 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 

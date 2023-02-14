@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 
 import '../../constant/theme.dart';
@@ -34,7 +31,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                 color: blackColor,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -44,7 +41,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                 color: blackColor,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Text(
@@ -55,7 +52,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                 fontWeight: bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(

@@ -42,6 +42,10 @@ class SuccessOrderPage extends StatelessWidget {
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: greyColor.withOpacity(0.2),
+                ),
                 child: Row(
                   children: [
                     const Icon(Icons.info),
@@ -68,10 +72,6 @@ class SuccessOrderPage extends StatelessWidget {
                     )
                   ],
                 ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: greyColor.withOpacity(0.2),
-                ),
               ),
               const SizedBox(height: 20),
               Row(
@@ -90,8 +90,8 @@ class SuccessOrderPage extends StatelessWidget {
                       title: "Lihat status",
                       onTap: () {
                         backScreenUntil();
-                        nextScreen(
-                            StatusOrderPage(status: STATUSORDER.ONPROGRESS));
+                        nextScreen(const StatusOrderPage(
+                            status: STATUSORDER.ONPROGRESS));
                       },
                     ),
                   ),

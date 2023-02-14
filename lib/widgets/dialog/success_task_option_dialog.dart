@@ -3,10 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_key.dart';
-import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
-import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
 import '../../constant/theme.dart';
 
@@ -20,7 +16,7 @@ class TaskOptionDialog {
       context: NavKey.navKey.currentState!.context,
       builder: (BuildContext builderContext) {
         Timer(
-          Duration(milliseconds: 1500),
+          const Duration(milliseconds: 1500),
           route ?? () {},
         );
         return Dialog(
@@ -40,7 +36,7 @@ class TaskOptionDialog {
 class TaskOptionDialogView extends StatelessWidget {
   final String? title, body;
 
-  TaskOptionDialogView({
+  const TaskOptionDialogView({
     Key? key,
     this.title,
     this.body,
@@ -49,7 +45,7 @@ class TaskOptionDialogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       width: screenWidth(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
@@ -58,18 +54,18 @@ class TaskOptionDialogView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
             width: 91,
             height: 91,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(icChecklist), fit: BoxFit.cover),
             ),
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           Text(
             title ?? '',
             style: primaryTextStyle.copyWith(
@@ -79,7 +75,7 @@ class TaskOptionDialogView extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
         ],

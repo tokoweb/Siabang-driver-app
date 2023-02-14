@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 
@@ -28,7 +30,7 @@ class CustomTextField extends StatelessWidget {
             color: spaceCadet.withOpacity(0.4),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 9,
         ),
         ClipRRect(
@@ -58,7 +60,7 @@ class CustomTextField extends StatelessWidget {
               hintStyle: primaryTextStyle.copyWith(
                 color: spaceCadet,
               ),
-              contentPadding: EdgeInsets.only(
+              contentPadding: const EdgeInsets.only(
                 left: 20,
                 top: 10,
                 bottom: 10,

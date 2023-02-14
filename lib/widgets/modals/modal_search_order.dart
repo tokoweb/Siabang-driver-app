@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/pages/task/list_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/customTextField/customTextField.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextForm.dart';
 
 import '../../constant/theme.dart';
@@ -34,7 +31,7 @@ class ManualSearchOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: screenHeight(context) * 0.47,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
@@ -47,7 +44,7 @@ class ManualSearchOrder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -56,11 +53,12 @@ class ManualSearchOrder extends StatelessWidget {
                   height: 5,
                   decoration: BoxDecoration(
                       color: Colors.grey[300],
-                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(12.0))),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Text('Antar ke lokasi',
@@ -68,14 +66,14 @@ class ManualSearchOrder extends StatelessWidget {
                   fontWeight: bold,
                   color: blackColor,
                 )),
-            SizedBox(
+            const SizedBox(
               height: 26,
             ),
-            CustomTextField(
+            const CustomTextField(
               title: 'No.resi',
               hintText: 'Masukkan nomor resi',
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -85,19 +83,19 @@ class ManualSearchOrder extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(
+                const Image(
                   image: AssetImage(icBarcode),
                   fit: BoxFit.cover,
                   width: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 11,
                 ),
                 Text(
@@ -109,13 +107,13 @@ class ManualSearchOrder extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 42,
             ),
             ButtonPrimary(
               title: 'Cari orderan',
               onTap: () {
-                nextScreen(ListOrderPage());
+                nextScreen(const ListOrderPage());
               },
             ),
           ],

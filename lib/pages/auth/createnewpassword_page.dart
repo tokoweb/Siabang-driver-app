@@ -16,10 +16,10 @@ class CreateNewPasswordPage extends StatelessWidget {
     Widget logo() {
       return Center(
         child: Container(
-          margin: EdgeInsets.only(top: 90),
+          margin: const EdgeInsets.only(top: 90),
           width: 180,
           height: 180,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
                 resetLogo,
@@ -32,7 +32,7 @@ class CreateNewPasswordPage extends StatelessWidget {
 
     Widget title() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 40,
         ),
         child: Column(
@@ -46,7 +46,7 @@ class CreateNewPasswordPage extends StatelessWidget {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -63,9 +63,9 @@ class CreateNewPasswordPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
@@ -73,24 +73,24 @@ class CreateNewPasswordPage extends StatelessWidget {
             children: [
               logo(),
               title(),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              CustomNewPasswordField(),
-              SizedBox(
+              const CustomNewPasswordField(),
+              const SizedBox(
                 height: 20,
               ),
-              CustomConfirmNewPasswordField(),
-              SizedBox(
+              const CustomConfirmNewPasswordField(),
+              const SizedBox(
                 height: 30,
               ),
               CustomButton(
-                margin: EdgeInsets.only(top: 105),
+                margin: const EdgeInsets.only(top: 105),
                 title: 'Kirim',
                 bgColor: midnightBlue,
                 textColor: whiteColor,
                 onPressed: () {
-                  nextScreenReplace(LoginPage());
+                  nextScreenReplace(const LoginPage());
                 },
               ),
             ],

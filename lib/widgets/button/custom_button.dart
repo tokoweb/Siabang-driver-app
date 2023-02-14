@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     super.key,
     required this.margin,
     required this.title,
@@ -19,28 +19,28 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          title,
-          style: primaryTextStyle.copyWith(
-            fontSize: 16,
-            color: textColor,
-          ),
-        ),
         style: ElevatedButton.styleFrom(
           foregroundColor: whiteColor,
-          disabledBackgroundColor: Color(0xffCAC9D1),
-          disabledForegroundColor: Color(0xffCAC9D1),
+          disabledBackgroundColor: const Color(0xffCAC9D1),
+          disabledForegroundColor: const Color(0xffCAC9D1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               16,
             ),
           ),
           backgroundColor: bgColor,
+        ),
+        child: Text(
+          title,
+          style: primaryTextStyle.copyWith(
+            fontSize: 16,
+            color: textColor,
+          ),
         ),
       ),
     );

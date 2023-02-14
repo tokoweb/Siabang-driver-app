@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Positioned(
             top: 25,
-            child: Container(width: 410, child: Image.asset(imWaveBar)),
+            child: SizedBox(width: 410, child: Image.asset(imWaveBar)),
           ),
           Positioned(
             top: kToolbarHeight * 2.5,

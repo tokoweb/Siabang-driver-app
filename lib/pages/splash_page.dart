@@ -18,9 +18,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       (() {
-        nextScreenReplace(LoginPage());
+        nextScreenReplace(const LoginPage());
       }),
     );
     super.initState();
@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Column(
@@ -38,14 +38,14 @@ class _SplashPageState extends State<SplashPage> {
             Container(
               width: 200,
               height: 212,
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 200,
               ),
               child: Image.asset(
                 logoSiabang,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 23,
             ),
             Text(
@@ -56,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 271,
             ),
             Text(

@@ -38,7 +38,6 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bckupItems.addAll(items);
   }

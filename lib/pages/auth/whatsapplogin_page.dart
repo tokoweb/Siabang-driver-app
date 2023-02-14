@@ -21,7 +21,6 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = TextEditingController();
     controller.addListener(() {
@@ -35,7 +34,6 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controller.dispose();
   }
@@ -44,7 +42,7 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
   Widget build(BuildContext context) {
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(top: 104),
+        margin: const EdgeInsets.only(top: 104),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,18 +53,18 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               'Silahkan masukkan whatsapp',
               style: primaryTextStyle,
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 width: 200,
                 height: 200,
                 child: Image.asset(
@@ -74,7 +72,7 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Form(
               key: _formkey,
               child: CustomTextFormWhatsappField(
@@ -90,13 +88,13 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
 
     Widget textButton() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 8,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Spacer(),
+            const Spacer(),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -105,7 +103,7 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
                 'Login dengan email & password',
                 style: primaryTextStyle.copyWith(
                   fontSize: 12,
-                  color: Color(0xff031863),
+                  color: const Color(0xff031863),
                 ),
               ),
             ),
@@ -117,30 +115,32 @@ class _WhatsappLoginPageState extends State<WhatsappLoginPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
             children: [
               header(),
               textButton(),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               CustomButton(
-                margin: EdgeInsets.only(top: 60),
+                margin: const EdgeInsets.only(top: 60),
                 title: 'Selanjutnya',
-                bgColor:
-                    isButtonActive == true ? midnightBlue : Color(0xffCAC9D1),
+                bgColor: isButtonActive == true
+                    ? midnightBlue
+                    : const Color(0xffCAC9D1),
                 textColor: isButtonActive == true
                     ? whiteColor
                     : blackColor.withOpacity(0.5),
                 onPressed: isButtonActive
                     ? () {
                         if (_formkey.currentState!.validate()) {
-                          return nextScreenReplace(VerifLoginWhatsappPage());
+                          return nextScreenReplace(
+                              const VerifLoginWhatsappPage());
                         }
                         setState(() {
                           isButtonActive = true;

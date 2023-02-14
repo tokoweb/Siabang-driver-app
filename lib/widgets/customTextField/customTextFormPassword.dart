@@ -1,8 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 
 class CustomTextPasswordField extends StatefulWidget {
-  CustomTextPasswordField({
+  const CustomTextPasswordField({
     super.key,
     this.controller,
   });
@@ -17,18 +19,17 @@ class CustomTextPasswordField extends StatefulWidget {
 class _CustomTextPasswordFieldState extends State<CustomTextPasswordField> {
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   bool tap = false;
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,7 @@ class _CustomTextPasswordFieldState extends State<CustomTextPasswordField> {
             color: spaceCadet.withOpacity(0.4),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 9,
         ),
         ClipRRect(

@@ -6,7 +6,7 @@ import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import '../../constant/theme.dart';
 
 class ModalImagePicker {
-  static Future show(BuildContext context) async {
+  static Future show(BuildContext context, Function()? onTapGallery) async {
     return await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -17,14 +17,19 @@ class ModalImagePicker {
       ),
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return ImagePickerModalView();
+        return ImagePickerModalView(
+          onTapGallery: onTapGallery,
+        );
       },
     );
   }
 }
 
+// ignore: must_be_immutable
 class ImagePickerModalView extends StatelessWidget {
-  const ImagePickerModalView({Key? key}) : super(key: key);
+  const ImagePickerModalView({Key? key, this.onTapGallery}) : super(key: key);
+
+  final Function()? onTapGallery;
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +95,7 @@ class ImagePickerModalView extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
-              backScreen();
-            },
+            onTap: onTapGallery ?? () {},
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

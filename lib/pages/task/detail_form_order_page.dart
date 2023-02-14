@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 // Tambahin Sukses order page
@@ -163,6 +161,7 @@ class _DetailFormOrderPageState extends State<DetailFormOrderPage> {
                   final res = await ModalDeliveryCourier.show(
                     context,
                     initialValue: armadaSelected,
+                    outOfTown: false,
                   );
                   if (res is String) {
                     armadaSelected = res;

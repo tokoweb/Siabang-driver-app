@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 
 import '../../constant/theme.dart';
@@ -97,7 +96,7 @@ class _DetailStatusPageState extends State<DetailStatusPage> {
               }).toList(),
               controlsBuilder: (context, details) {
                 return Row(
-                  children: [],
+                  children: const [],
                 );
               },
               onStepTapped: (value) {

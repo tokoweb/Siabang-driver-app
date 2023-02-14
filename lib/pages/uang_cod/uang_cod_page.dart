@@ -21,7 +21,7 @@ class UangCodPage extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Container(
-        margin: EdgeInsets.all(
+        margin: const EdgeInsets.all(
           16,
         ),
         child: Column(
@@ -29,7 +29,7 @@ class UangCodPage extends StatelessWidget {
           children: [
             Container(
               width: screenWidth(context),
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: greyColor.withOpacity(0.125),
                 borderRadius: BorderRadius.circular(16),
@@ -44,7 +44,7 @@ class UangCodPage extends StatelessWidget {
                     ),
                     subtitle: '18 sep 2022',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
                   Text(
@@ -58,14 +58,14 @@ class UangCodPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(
+            const Divider(
               thickness: 1,
             ),
             Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               child: TextColumn(
                 title: 'Bukti setor',
                 titleStyle: primaryTextStyle.copyWith(
@@ -80,27 +80,30 @@ class UangCodPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               width: 102,
               height: 102,
               child: DataPhoto(
                 onTap: () {
-                  ModalImagePicker.show(context);
+                  ModalImagePicker.show(
+                    context,
+                    () {},
+                  );
                 },
               ),
             ),
-            Spacer(),
+            const Spacer(),
             CustomButton(
-              margin: EdgeInsets.only(),
+              margin: const EdgeInsets.only(),
               title: 'Selesai',
               textColor: whiteColor,
               bgColor: midnightBlue,
               onPressed: () {
                 nextScreen(
-                  SuccessDepositPage(),
+                  const SuccessDepositPage(),
                 );
               },
             ),

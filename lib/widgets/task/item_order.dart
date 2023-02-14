@@ -7,6 +7,7 @@ import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/detail_task_p
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 
+import '../../pages/task/task_deliver_packages/detail_task_deliver_packages_page.dart';
 import '../../pages/task/task_luar_kota/detail_task_luar_kota.dart';
 
 class ItemOrder extends StatefulWidget {
@@ -103,6 +104,8 @@ class _ItemOrderState extends State<ItemOrder> {
                               return Colors.red;
                             case STATUSORDER.PICKUP:
                               return const Color(0xff08B6C1);
+                            case STATUSORDER.DELIVERPACKAGES:
+                              break;
                           }
                         }(),
                         borderRadius: BorderRadius.circular(100),
@@ -126,6 +129,8 @@ class _ItemOrderState extends State<ItemOrder> {
                               return 'Baru';
                             case STATUSORDER.REJECTED:
                               return 'ditolak';
+                            case STATUSORDER.DELIVERPACKAGES:
+                              return '';
                           }
                         }(),
                         style: primaryTextStyle.copyWith(
@@ -168,6 +173,8 @@ class _ItemOrderState extends State<ItemOrder> {
                       return const RejectedBody();
                     case STATUSORDER.NEWOUTOFTOWN:
                       return const NewBodyOutOfTown();
+                    case STATUSORDER.DELIVERPACKAGES:
+                      return const DeliverPackagesBody();
                   }
                 }(),
               ),
@@ -243,7 +250,7 @@ class CompletedBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
               margin: const EdgeInsets.only(
@@ -305,7 +312,7 @@ class ShippedBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
               margin: const EdgeInsets.only(
@@ -418,7 +425,7 @@ class PendingBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
               margin: const EdgeInsets.only(
@@ -531,7 +538,7 @@ class NewBodyPickUp extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
             margin: const EdgeInsets.only(
@@ -541,7 +548,7 @@ class NewBodyPickUp extends StatelessWidget {
             textColor: whiteColor,
             bgColor: const Color(0xff258BD4),
             onPressed: () {
-              nextScreen(DetailTaskPickUpPage());
+              nextScreen(const DetailTaskPickUpPage());
             },
           ),
         ),
@@ -647,7 +654,7 @@ class NewBodyInTheTown extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
             margin: const EdgeInsets.only(
@@ -657,7 +664,7 @@ class NewBodyInTheTown extends StatelessWidget {
             textColor: whiteColor,
             bgColor: const Color(0xff08B6C1),
             onPressed: () {
-              nextScreen(DetailTaskDalamKotaPage());
+              nextScreen(const DetailTaskDalamKotaPage());
             },
           ),
         ),
@@ -763,7 +770,7 @@ class NewBodyOutOfTown extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
             margin: const EdgeInsets.only(
@@ -773,7 +780,7 @@ class NewBodyOutOfTown extends StatelessWidget {
             textColor: whiteColor,
             bgColor: const Color(0xffF49D36),
             onPressed: () {
-              nextScreen(DetailTaskLuarKotaPage());
+              nextScreen(const DetailTaskLuarKotaPage());
             },
           ),
         ),
@@ -879,7 +886,7 @@ class RejectedBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: 40,
           child: CustomButton(
               margin: const EdgeInsets.only(
@@ -889,6 +896,137 @@ class RejectedBody extends StatelessWidget {
               textColor: whiteColor,
               bgColor: const Color(0xffF49D36),
               onPressed: () {}),
+        ),
+      ],
+    );
+  }
+}
+
+class DeliverPackagesBody extends StatelessWidget {
+  const DeliverPackagesBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(icTransit),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              width: screenWidth(context) / 1.42,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: greyColor.withOpacity(0.25),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    "Pengiriman dalam kota",
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 10,
+                      color: blackColor,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Bandung",
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 10.sp,
+                      fontWeight: semiBold,
+                      color: blackColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Text(
+          "Penjemputan dari",
+          style: primaryTextStyle.copyWith(
+            fontSize: 10,
+            color: greyColor,
+          ),
+        ),
+        Text(
+          "John Doe (0812314313121)",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            fontWeight: bold,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "Bandung Kulon, Kota Bandung, Jawa Barat",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        Text(
+          "40123",
+          style: primaryTextStyle.copyWith(
+            fontSize: 12,
+            color: blackColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: greyColor)),
+              child: Icon(Icons.notes_sharp, color: greyColor, size: 15),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              "Depan jalan samping indomart",
+              style: primaryTextStyle.copyWith(
+                fontSize: 12,
+                color: blackColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Divider(
+          thickness: 1.5,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 40,
+          child: CustomButton(
+            margin: const EdgeInsets.only(
+              top: 30,
+            ),
+            title: 'Antar ke lokasi',
+            textColor: whiteColor,
+            bgColor: const Color(0xff6975DC),
+            onPressed: () {
+              nextScreen(const DetailTaskDeliverPackagesPage());
+            },
+          ),
         ),
       ],
     );

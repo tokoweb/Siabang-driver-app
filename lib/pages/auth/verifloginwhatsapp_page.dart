@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/home_page.dart';
 import 'package:siabang_driver_app/pages/main_page.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 
@@ -17,19 +16,18 @@ class VerifLoginWhatsappPage extends StatefulWidget {
 
 class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
   Timer? countdownTimer;
-  Duration codeDuration = Duration(
+  Duration codeDuration = const Duration(
     minutes: 1,
   );
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     countdownTimer =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
   void setCountDown() {
-    final reduceSecondsBy = 1;
+    const reduceSecondsBy = 1;
     if (mounted) {
       setState(() {
         final seconds = codeDuration.inSeconds - reduceSecondsBy;
@@ -49,10 +47,10 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
   void resetTimer() {
     stopTimer();
     setState(
-      () => codeDuration = Duration(minutes: 1),
+      () => codeDuration = const Duration(minutes: 1),
     );
     countdownTimer =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
   @override
@@ -62,7 +60,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
     final seconds = strDigits(codeDuration.inSeconds.remainder(60));
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 104,
         ),
         child: Column(
@@ -76,7 +74,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -85,7 +83,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -102,7 +100,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
 
     Widget formField() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 60,
         ),
         child: Column(
@@ -116,7 +114,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                     color: spaceCadet,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -127,7 +125,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Form(
@@ -153,7 +151,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '0',
                         border: InputBorder.none,
                       ),
@@ -165,7 +163,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -187,7 +185,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: '1'),
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
@@ -197,7 +195,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -219,7 +217,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '9',
                         border: InputBorder.none,
                       ),
@@ -231,7 +229,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -253,7 +251,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '4',
                         border: InputBorder.none,
                       ),
@@ -265,7 +263,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -287,7 +285,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '2',
                         border: InputBorder.none,
                       ),
@@ -299,7 +297,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -316,7 +314,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '3',
                         border: InputBorder.none,
                       ),
@@ -331,7 +329,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -392,7 +390,7 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
                         TextButton(
                           onPressed: () {
                             resetTimer();
-                            nextScreenReplace(VerifLoginWhatsappPage());
+                            nextScreenReplace(const VerifLoginWhatsappPage());
                           },
                           child: Text(
                             'OK',
@@ -434,9 +432,9 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
@@ -444,17 +442,17 @@ class _VerifLoginWhatsappPageState extends State<VerifLoginWhatsappPage> {
             children: [
               header(),
               formField(),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               CustomButton(
-                margin: EdgeInsets.only(top: 290),
+                margin: const EdgeInsets.only(top: 290),
                 title: 'Verifikasi',
                 bgColor: midnightBlue,
                 textColor: whiteColor,
                 onPressed: () {
                   nextScreenRemoveUntil(
-                    MainScreen(),
+                    const MainScreen(),
                   );
                 },
               ),

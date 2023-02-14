@@ -11,7 +11,7 @@ import '../../widgets/customTextField/customTextForm.dart';
 import '../../widgets/customTextField/customTextFormPassword.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -26,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controllerEmail = TextEditingController();
     controllerPassword = TextEditingController();
@@ -48,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controllerEmail.dispose();
     controllerPassword.dispose();
@@ -58,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(top: 104),
+        margin: const EdgeInsets.only(top: 104),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,18 +67,18 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               'Silahkan masukkan email',
               style: primaryTextStyle,
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 width: 150,
                 height: 150,
                 child: Image.asset(
@@ -88,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 55),
+            const SizedBox(height: 55),
             Form(
               key: _formKey,
               child: CustomTextField(
@@ -97,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'johndoe@gmail.com',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -113,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Widget textButton() {
       return Container(
-        margin: EdgeInsets.only(top: 8),
+        margin: const EdgeInsets.only(top: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -122,14 +120,14 @@ class _LoginPageState extends State<LoginPage> {
               child: TextButton(
                 onPressed: () {
                   nextScreen(
-                    ResetPasswordPage(),
+                    const ResetPasswordPage(),
                   );
                 },
                 child: Text(
                   'Lupa Password',
                   style: primaryTextStyle.copyWith(
                     fontWeight: semiBold,
-                    color: Color(0xff031863),
+                    color: const Color(0xff031863),
                   ),
                 ),
               ),
@@ -138,13 +136,13 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {},
               child: TextButton(
                 onPressed: () {
-                  nextScreen(WhatsappLoginPage());
+                  nextScreen(const WhatsappLoginPage());
                 },
                 child: Text(
                   'Login dengan no whatsapp & OTP',
                   style: primaryTextStyle.copyWith(
                     fontSize: 12,
-                    color: Color(0xff031863),
+                    color: const Color(0xff031863),
                   ),
                 ),
               ),
@@ -155,12 +153,13 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     Widget button() {
-      return Container(
+      return SizedBox(
         width: double.infinity,
         child: CustomButton(
-          margin: EdgeInsets.only(top: 60),
+          margin: const EdgeInsets.only(top: 60),
           title: 'Login',
-          bgColor: isButtonActive == true ? midnightBlue : Color(0xffCAC9D1),
+          bgColor:
+              isButtonActive == true ? midnightBlue : const Color(0xffCAC9D1),
           textColor:
               isButtonActive == true ? whiteColor : blackColor.withOpacity(0.5),
           onPressed: isButtonActive
@@ -168,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState!.validate() &&
                       _formKeyPw.currentState!.validate()) {
                     return nextScreenReplace(
-                      VerifLoginEmailPage(),
+                      const VerifLoginEmailPage(),
                     );
                   }
                   setState(() {
@@ -183,17 +182,24 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: 24,
-          ),
-          child: Column(
-            children: [
-              header(),
-              textButton(),
-              button(),
-            ],
+        reverse: true,
+        physics: const BouncingScrollPhysics(),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+          child: Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 24,
+            ),
+            child: Column(
+              children: [
+                header(),
+                textButton(),
+                button(),
+              ],
+            ),
           ),
         ),
       ),

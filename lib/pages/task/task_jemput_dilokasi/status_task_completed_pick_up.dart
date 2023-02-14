@@ -89,6 +89,7 @@ class _StatusTaskCompletedPickUpPageState
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: Duration(
                             seconds: 2,
@@ -279,6 +280,7 @@ class _StatusTaskCompletedPickUpPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...[
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: Container(
                         width: screenWidth(context),

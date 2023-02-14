@@ -4,20 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/domain/commons/successful_delivery.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
 import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
 import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_dalam_kota.dart';
-import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_deliver_packages_dalam_kota.dart';
-import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 import 'package:siabang_driver_app/widgets/dialog/general_dialog.dart';
-import 'package:siabang_driver_app/widgets/dialog/success_task_option_dialog.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_pending.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:flutter/services.dart';
 
@@ -95,6 +89,7 @@ class _StatusTaskPendingPageState extends State<StatusTaskPendingPage> {
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: Duration(
                             seconds: 2,
@@ -249,36 +244,45 @@ class _StatusTaskPendingPageState extends State<StatusTaskPendingPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
@@ -295,6 +299,7 @@ class _StatusTaskPendingPageState extends State<StatusTaskPendingPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...[
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: Container(
                         width: screenWidth(context),

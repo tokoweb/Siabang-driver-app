@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/task_jemput_dilokasi/status_task_pick_up.dart';
+import 'package:siabang_driver_app/pages/task/task_luar_kota/status_task_luar_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
@@ -75,6 +75,7 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: const Duration(
                             seconds: 2,
@@ -229,9 +230,9 @@ class _DetailTaskLuarKotaPageState extends State<DetailTaskLuarKotaPage> {
                       onTap: () {
                         ModalDeliveryCourier.show(
                           context,
-                          outOfTown: true,
+                          outOfTown: false,
                           onTap: () {
-                            nextScreen(const StatusTaskPickUpPage());
+                            nextScreen(const StatusTaskLuarKotaPage());
                           },
                         );
                       },

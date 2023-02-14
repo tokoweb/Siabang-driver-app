@@ -106,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       BottomNavigationBarItem(
                         icon: Container(
-                          margin: EdgeInsets.only(bottom: 5),
+                          margin: const EdgeInsets.only(bottom: 5),
                           child: Image.asset(
                             currentPage == 3 ? icProfileSelected : icProfile,
                             width: 24,

@@ -10,7 +10,7 @@ class VerifResetPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 104,
         ),
         child: Column(
@@ -24,7 +24,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -33,7 +33,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -50,7 +50,7 @@ class VerifResetPasswordPage extends StatelessWidget {
 
     Widget formField() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 60,
         ),
         child: Column(
@@ -64,7 +64,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                     color: spaceCadet,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -75,7 +75,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Form(
@@ -101,7 +101,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -112,7 +112,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -134,7 +134,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -145,7 +145,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -167,7 +167,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -178,7 +178,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -200,7 +200,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -211,7 +211,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -233,7 +233,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -244,7 +244,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -261,7 +261,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -275,7 +275,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -334,9 +334,9 @@ class VerifResetPasswordPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
@@ -349,7 +349,7 @@ class VerifResetPasswordPage extends StatelessWidget {
                   Navigator.pushNamed(context, '/createnewpasswordPage');
                 },
                 child: CustomButton(
-                  margin: EdgeInsets.only(top: 290),
+                  margin: const EdgeInsets.only(top: 290),
                   title: 'Verifikasi',
                   bgColor: midnightBlue,
                   textColor: whiteColor,

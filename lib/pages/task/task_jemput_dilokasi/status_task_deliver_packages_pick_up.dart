@@ -93,6 +93,7 @@ class _StatusTaskDeliverPackagesPickUpPageState
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: Duration(
                             seconds: 2,
@@ -173,7 +174,7 @@ class _StatusTaskDeliverPackagesPickUpPageState
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
+                      SizedBox(
                         width: 350,
                         child: ButtonPrimary(
                           color: Color(0xffE4E6EF),
@@ -206,36 +207,45 @@ class _StatusTaskDeliverPackagesPickUpPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
@@ -299,7 +309,7 @@ class _StatusTaskDeliverPackagesPickUpPageState
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -319,7 +329,7 @@ class _StatusTaskDeliverPackagesPickUpPageState
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -354,36 +364,45 @@ class _StatusTaskDeliverPackagesPickUpPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
@@ -404,6 +423,7 @@ class _StatusTaskDeliverPackagesPickUpPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...[
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: Container(
                         width: screenWidth(context),

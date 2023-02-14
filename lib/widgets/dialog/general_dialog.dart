@@ -60,7 +60,7 @@ class GeneralDialogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       width: screenWidth(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
@@ -77,7 +77,7 @@ class GeneralDialogView extends StatelessWidget {
               color: blackColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -88,7 +88,7 @@ class GeneralDialogView extends StatelessWidget {
               color: blackColor,
             ),
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           reversePostionBtn
               ? Row(
                   children: [
@@ -125,7 +125,7 @@ class GeneralDialogView extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: ButtonOutline(
                         title: titlePstiveBtn ?? "Ya",

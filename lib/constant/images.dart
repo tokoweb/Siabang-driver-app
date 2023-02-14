@@ -25,6 +25,7 @@ const String icLocation = '${pathIcons}ic_location.png';
 const String icTermCondition = '${pathIcons}ic_tac.png';
 const String icPrivacyPolicy = '${pathIcons}ic_privacy.png';
 const String icInfo = '${pathIcons}ic_info.png';
+const String icTransit = '${pathIcons}ic_transit.png';
 const String icStop = '${pathIcons}ic_stop.png';
 const String icEdit = '${pathIcons}ic_edit.png';
 const String icDividerVert = '${pathIcons}ic_divider_vert.png';

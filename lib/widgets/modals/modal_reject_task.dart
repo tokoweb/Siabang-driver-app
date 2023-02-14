@@ -5,15 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/pages/task/detail_status_task_reject.dart';
-import 'package:siabang_driver_app/pages/task/status_order_page.dart';
-import 'package:siabang_driver_app/pages/task/status_task_pending_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/customTextField/customTextField.dart';
 import 'package:siabang_driver_app/widgets/customTextField/customTextForm.dart';
-import 'package:siabang_driver_app/widgets/dialog/general_dialog.dart';
 import 'package:siabang_driver_app/widgets/dialog/success_task_option_dialog.dart';
 
-import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class ModalRejectTask {

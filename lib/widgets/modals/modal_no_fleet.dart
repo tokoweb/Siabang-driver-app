@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/home_page.dart';
-import 'package:siabang_driver_app/pages/main_page.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
 import '../../constant/theme.dart';
@@ -65,7 +62,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
             width: 90,
             height: 90,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
@@ -83,7 +80,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
               backScreen();
             },
           ),
-          SizedBox(
+          const SizedBox(
             width: 11,
           ),
         ],

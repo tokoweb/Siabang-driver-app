@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/constant/export_constant.dart';
-import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/status_order_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
 import '../../../constant/theme.dart';

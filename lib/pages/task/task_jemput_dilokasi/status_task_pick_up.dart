@@ -90,6 +90,7 @@ class _StatusTaskPickUpPageState extends State<StatusTaskPickUpPage> {
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: Duration(
                             seconds: 2,
@@ -244,36 +245,45 @@ class _StatusTaskPickUpPageState extends State<StatusTaskPickUpPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: 95,
                     height: 95,
                     child: DataPhoto(
                       onTap: () {
-                        ModalImagePicker.show(context);
+                        ModalImagePicker.show(
+                          context,
+                          () {},
+                        );
                       },
                     ),
                   ),
@@ -290,6 +300,7 @@ class _StatusTaskPickUpPageState extends State<StatusTaskPickUpPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...[
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: Container(
                         width: screenWidth(context),

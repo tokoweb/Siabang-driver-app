@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
@@ -7,8 +6,6 @@ import 'package:siabang_driver_app/widgets/multi_text/text_column.dart';
 import 'package:siabang_driver_app/widgets/multi_text/text_row.dart';
 
 import '../../constant/theme.dart';
-import 'task_page.dart';
-import '../appbar/appbar_primary.dart';
 
 class SummaryDetailOrderPage extends StatefulWidget {
   const SummaryDetailOrderPage({super.key});

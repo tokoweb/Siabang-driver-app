@@ -15,12 +15,12 @@ class _CustomConfirmNewPasswordFieldState
     extends State<CustomConfirmNewPasswordField> {
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   bool tap = false;
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class _CustomConfirmNewPasswordFieldState
             color: spaceCadet.withOpacity(0.4),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 9,
         ),
         Container(
@@ -72,7 +72,7 @@ class _CustomConfirmNewPasswordFieldState
                 border: InputBorder.none,
                 hintText: 'Password Baru',
                 hintStyle: primaryTextStyle.copyWith(
-                  color: Color(0xff031863).withOpacity(0.2),
+                  color: const Color(0xff031863).withOpacity(0.2),
                 ),
               ),
               obscureText: tap ? false : true,

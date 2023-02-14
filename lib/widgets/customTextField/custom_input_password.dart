@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class CustomInputPassword extends StatefulWidget {

@@ -91,6 +91,7 @@ class _DetailTaskPickUpPageState extends State<DetailTaskPickUpPage> {
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: const Duration(
                             seconds: 2,
@@ -244,6 +245,7 @@ class _DetailTaskPickUpPageState extends State<DetailTaskPickUpPage> {
                           onTap: () {
                             nextScreen(const StatusTaskPickUpPage());
                           },
+                          outOfTown: false,
                         );
                       },
                     ),

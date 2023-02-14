@@ -77,11 +77,11 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                       color: blackColor,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(widget.status != STATUSORDER.PENDING
                       ? "987yhE62w"
                       : "123456789123456"),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   GestureDetector(
                       onTap: () async {
                         await Clipboard.setData(
@@ -91,26 +91,27 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: Duration(
+                          duration: const Duration(
                             seconds: 2,
                           ),
-                          content: Text(
+                          content: const Text(
                             'Copied',
                             textAlign: TextAlign.center,
                           ),
                           backgroundColor: midnightBlue,
                         ));
                       },
-                      child: Icon(Icons.copy, size: 16)),
+                      child: const Icon(Icons.copy, size: 16)),
                 ],
               ),
               SizedBox(height: 8.h),
-              RowText(
+              const RowText(
                   text1: "Tanggal order", text2: "12 Okt 20222 - 10:32 WIB"),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.h),
-                child: Divider(thickness: 2),
+                child: const Divider(thickness: 2),
               ),
               Text(
                 "Alamat",
@@ -177,7 +178,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
               ),
               Container(
                 width: screenWidth(context),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: greyColor.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(14),
@@ -194,7 +195,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                         fontWeight: semiBold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 14,
                     ),
                     RowText(
@@ -207,7 +208,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                         fontWeight: semiBold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 14,
                     ),
                     RowText(
@@ -272,7 +273,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                       borderColor: Colors.red,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 11,
                   ),
                   Expanded(
@@ -281,9 +282,12 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
                       textStyle: primaryTextStyle.copyWith(
                         color: whiteColor,
                       ),
-                      color: Color(0xff27AE60),
+                      color: const Color(0xff27AE60),
                       onTap: () {
-                        ModalDeliveryCourier.show(context);
+                        ModalDeliveryCourier.show(
+                          context,
+                          outOfTown: false,
+                        );
                       },
                     ),
                   ),

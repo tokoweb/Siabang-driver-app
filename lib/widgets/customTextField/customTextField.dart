@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_if_elements_to_conditional_expressions, prefer_const_constructors
+// ignore_for_file: prefer_if_elements_to_conditional_expressions, prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:siabang_driver_app/domain/commons/currency_text_input_formater_utils.dart';
 
-import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class CustomInputText extends StatefulWidget {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 
 class SuccessDepositPage extends StatelessWidget {
@@ -15,14 +14,14 @@ class SuccessDepositPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
+            const Image(
               image: AssetImage(
                 imSuccess,
               ),
               width: 180,
               height: 180,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Text(
@@ -33,7 +32,7 @@ class SuccessDepositPage extends StatelessWidget {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -43,10 +42,10 @@ class SuccessDepositPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Container(
+            SizedBox(
               width: 158,
               height: 50,
               child: ButtonOutline(

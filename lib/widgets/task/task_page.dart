@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/notif/notif_page.dart';
 import 'package:siabang_driver_app/widgets/task/summary_detail_order_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/task/item_order.dart';
-
-import '../../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 enum STATUSORDER {
@@ -16,7 +13,8 @@ enum STATUSORDER {
   NEW,
   NEWOUTOFTOWN,
   REJECTED,
-  PICKUP
+  PICKUP,
+  DELIVERPACKAGES,
 }
 
 enum STATUSDRIVER { INIT, ACCEPTEDUNPAID, ACCEPTEDPAID, ARRIVED }
@@ -41,7 +39,6 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabSelected = widget.controlTab ?? "Semua";
   }

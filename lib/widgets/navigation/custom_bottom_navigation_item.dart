@@ -34,7 +34,7 @@ class CustomBottomNavigationItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 17,
           ),
           Image.asset(
@@ -45,7 +45,7 @@ class CustomBottomNavigationItem extends StatelessWidget {
                 ? midnightBlue
                 : disableColor,
           ),
-          SizedBox(
+          const SizedBox(
             height: 3,
           ),
           Center(

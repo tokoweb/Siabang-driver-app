@@ -17,19 +17,18 @@ class VerifLoginEmailPage extends StatefulWidget {
 
 class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
   Timer? countdownTimer;
-  Duration codeDuration = Duration(
+  Duration codeDuration = const Duration(
     minutes: 1,
   );
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     countdownTimer =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
   void setCountDown() {
-    final reduceSecondsBy = 1;
+    const reduceSecondsBy = 1;
     if (mounted) {
       setState(() {
         final seconds = codeDuration.inSeconds - reduceSecondsBy;
@@ -49,10 +48,10 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
   void resetTimer() {
     stopTimer();
     setState(
-      () => codeDuration = Duration(minutes: 1),
+      () => codeDuration = const Duration(minutes: 1),
     );
     countdownTimer =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
   @override
@@ -62,7 +61,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
     final seconds = strDigits(codeDuration.inSeconds.remainder(60));
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 104,
         ),
         child: Column(
@@ -76,7 +75,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -85,7 +84,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -102,7 +101,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
 
     Widget formField() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 60,
         ),
         child: Column(
@@ -116,7 +115,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                     color: spaceCadet,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -127,7 +126,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Form(
@@ -153,7 +152,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '0',
                         border: InputBorder.none,
                       ),
@@ -165,7 +164,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -187,7 +186,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: '1'),
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
@@ -197,7 +196,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -219,7 +218,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '9',
                         border: InputBorder.none,
                       ),
@@ -231,7 +230,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -253,7 +252,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '4',
                         border: InputBorder.none,
                       ),
@@ -265,7 +264,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -287,7 +286,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '2',
                         border: InputBorder.none,
                       ),
@@ -299,7 +298,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Container(
@@ -316,7 +315,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         fontSize: 18,
                         fontWeight: semiBold,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '3',
                         border: InputBorder.none,
                       ),
@@ -331,7 +330,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -349,7 +348,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        nextScreenReplace(LoginPage());
+                        nextScreenReplace(const LoginPage());
                       },
                       child: Text(
                         'Kirim melalui email',
@@ -389,7 +388,7 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
                         TextButton(
                           onPressed: () {
                             resetTimer();
-                            nextScreenReplace(VerifLoginEmailPage());
+                            nextScreenReplace(const VerifLoginEmailPage());
                           },
                           child: Text(
                             'OK',
@@ -431,9 +430,9 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
@@ -441,17 +440,17 @@ class _VerifLoginEmailPageState extends State<VerifLoginEmailPage> {
             children: [
               header(),
               formField(),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               CustomButton(
-                margin: EdgeInsets.only(top: 290),
+                margin: const EdgeInsets.only(top: 290),
                 title: 'Verifikasi',
                 bgColor: midnightBlue,
                 textColor: whiteColor,
                 onPressed: () {
                   nextScreenRemoveUntil(
-                    MainScreen(),
+                    const MainScreen(),
                   );
                 },
               ),

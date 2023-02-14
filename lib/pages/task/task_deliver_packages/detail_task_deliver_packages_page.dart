@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_dalam_kota.dart';
+import 'package:siabang_driver_app/pages/task/task_luar_kota/status_task_luar_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
-import 'package:siabang_driver_app/pages/services/service_intercity/data_receiver_intercity_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
@@ -18,11 +17,11 @@ import '../../../constant/export_constant.dart';
 import '../../../constant/theme.dart';
 import '../../../widgets/task/task_page.dart';
 
-class DetailTaskDalamKotaPage extends StatefulWidget {
+class DetailTaskDeliverPackagesPage extends StatefulWidget {
   final STATUSORDER status;
   final STATUSDRIVER statusdriver;
   final bool statusRefund;
-  const DetailTaskDalamKotaPage({
+  const DetailTaskDeliverPackagesPage({
     Key? key,
     this.status = STATUSORDER.CANCELED,
     this.statusdriver = STATUSDRIVER.INIT,
@@ -30,11 +29,12 @@ class DetailTaskDalamKotaPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DetailTaskDalamKotaPage> createState() =>
-      _DetailTaskDalamKotaPageState();
+  State<DetailTaskDeliverPackagesPage> createState() =>
+      _DetailTaskDeliverPackagesPageState();
 }
 
-class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
+class _DetailTaskDeliverPackagesPageState
+    extends State<DetailTaskDeliverPackagesPage> {
   int itemCount = 1;
   String? armadaSelected;
 
@@ -43,24 +43,8 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
     return Scaffold(
       appBar: AppBarPrimary(
         title: "Detail orderan",
-        actions: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFF08B6C1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Text(
-              "Baru",
-              style: primaryTextStyle.copyWith(
-                fontSize: 12,
-                color: whiteColor,
-              ),
-            ),
-          ),
-        ],
         color: Theme.of(context).scaffoldBackgroundColor,
-        status: "Pengiriman dalam kota • Jemput di lokasi & kirim",
+        status: "Pengiriman dalam kota • Antar ke lokasi",
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -88,7 +72,7 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                       onTap: () async {
                         await Clipboard.setData(
                           ClipboardData(
-                            text: widget.status != STATUSORDER.NEW
+                            text: widget.status != STATUSORDER.PENDING
                                 ? '987yhE62w'
                                 : '123456789123456',
                           ),
@@ -115,12 +99,16 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                 margin: EdgeInsets.symmetric(vertical: 10.h),
                 child: const Divider(thickness: 2),
               ),
-              Text(
-                "Alamat",
-                style: primaryTextStyle.copyWith(
-                  fontSize: 14,
+              RowText(
+                text1: 'Alamat',
+                text2: 'Jarak kirim 3,2km',
+                textStyle1: primaryTextStyle.copyWith(
                   fontWeight: semiBold,
                   color: blackColor,
+                ),
+                textStyle2: primaryTextStyle.copyWith(
+                  fontSize: 12,
+                  color: greyColor,
                 ),
               ),
               const SizedBox(height: 16),
@@ -130,12 +118,6 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                   Column(
                     children: [
                       const SizedBox(height: 16),
-                      Icon(Icons.circle_outlined,
-                          color: crimsonColor, size: 20),
-                      Image.asset(
-                        icDividerVert,
-                        height: screenWidth(context) / 2,
-                      ),
                       Icon(Icons.circle_outlined,
                           color: crimsonColor, size: 20),
                     ],
@@ -158,18 +140,6 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                           },
                         ),
                         const SizedBox(height: 16),
-                        ItemAddressOrderPage(
-                          title: "Pengiriman ke",
-                          name: "Jane Doe",
-                          phone: "+62 12312412",
-                          address:
-                              "Bandung Kulon, Kota Bandung, Jawa Barat\n40123",
-                          isEditable: false,
-                          onEditTap: () {
-                            nextScreen(const DataReceiverIntercityPage(
-                                fromEdit: true));
-                          },
-                        ),
                       ],
                     ),
                   ),
@@ -193,32 +163,6 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                         color: blackColor,
                       ),
                       text2: 'Motor',
-                      textStyle2: primaryTextStyle.copyWith(
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    RowText(
-                      text1: 'Metode pembayaran',
-                      textStyle1: primaryTextStyle.copyWith(
-                        color: blackColor,
-                      ),
-                      text2: 'Tunai (COD)',
-                      textStyle2: primaryTextStyle.copyWith(
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    RowText(
-                      text1: 'Total pembayaran',
-                      textStyle1: primaryTextStyle.copyWith(
-                        color: blackColor,
-                      ),
-                      text2: 'Rp 90.000',
                       textStyle2: primaryTextStyle.copyWith(
                         fontWeight: semiBold,
                       ),
@@ -288,10 +232,10 @@ class _DetailTaskDalamKotaPageState extends State<DetailTaskDalamKotaPage> {
                       onTap: () {
                         ModalDeliveryCourier.show(
                           context,
+                          outOfTown: true,
                           onTap: () {
-                            nextScreen(const StatusTaskDalamKotaPage());
+                            nextScreen(const StatusTaskLuarKotaPage());
                           },
-                          outOfTown: false,
                         );
                       },
                     ),

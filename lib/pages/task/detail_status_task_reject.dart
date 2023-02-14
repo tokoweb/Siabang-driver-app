@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
-import 'package:siabang_driver_app/pages/task/task_dalam_kota/status_task_dalam_kota.dart';
 import 'package:siabang_driver_app/pages/task/widget/item_address_order.dart';
 import 'package:siabang_driver_app/pages/services/data_information_equipment_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_receiver_intercity_page.dart';
 import 'package:siabang_driver_app/pages/services/service_intercity/data_sender_intercity_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-import 'package:siabang_driver_app/widgets/button/button_outline.dart';
-import 'package:siabang_driver_app/widgets/button/button_primary.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_delivery_courier.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_reject_task.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_stop_work.dart';
 import 'package:siabang_driver_app/widgets/task/item_draft_order.dart';
 import 'package:flutter/services.dart';
 
@@ -84,11 +78,11 @@ class _StatusDetailTaskRejectedPageState
                       color: blackColor,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(widget.status != STATUSORDER.PENDING
                       ? "987yhE62w"
                       : "123456789123456"),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   GestureDetector(
                       onTap: () async {
                         await Clipboard.setData(
@@ -98,26 +92,27 @@ class _StatusDetailTaskRejectedPageState
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: Duration(
+                          duration: const Duration(
                             seconds: 2,
                           ),
-                          content: Text(
+                          content: const Text(
                             'Copied',
                             textAlign: TextAlign.center,
                           ),
                           backgroundColor: midnightBlue,
                         ));
                       },
-                      child: Icon(Icons.copy, size: 16)),
+                      child: const Icon(Icons.copy, size: 16)),
                 ],
               ),
               SizedBox(height: 8.h),
-              RowText(
+              const RowText(
                   text1: "Tanggal order", text2: "12 Okt 20222 - 10:32 WIB"),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.h),
-                child: Divider(thickness: 2),
+                child: const Divider(thickness: 2),
               ),
               Text(
                 "Alamat",
@@ -184,7 +179,7 @@ class _StatusDetailTaskRejectedPageState
               ),
               Container(
                 width: screenWidth(context),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: greyColor.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(14),
@@ -201,7 +196,7 @@ class _StatusDetailTaskRejectedPageState
                         fontWeight: semiBold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 14,
                     ),
                     RowText(
@@ -214,7 +209,7 @@ class _StatusDetailTaskRejectedPageState
                         fontWeight: semiBold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 14,
                     ),
                     RowText(

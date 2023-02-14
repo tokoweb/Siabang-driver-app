@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:siabang_driver_app/constant/images.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/pages/dashboard/dashboard_page.dart';
 import 'package:siabang_driver_app/pages/notif/notif_page.dart';
-import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
 import 'package:siabang_driver_app/pages/uang_cod/uang_cod_page.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_search_order.dart';
@@ -29,46 +29,44 @@ class _HomePageState extends State<HomePage> {
     STATUSORDER.NEW,
     STATUSORDER.PICKUP,
     STATUSORDER.NEWOUTOFTOWN,
-    STATUSORDER.COMPlETED,
+    STATUSORDER.DELIVERPACKAGES,
   ];
 
   Widget buttonUangCod() {
-    return Container(
-      child: ElevatedButton(
-        onPressed: () {
-          nextScreen(UangCodPage());
-        },
-        child: Row(
-          children: [
-            Image.asset(
-              icRp,
-              width: 20,
-              height: 20,
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Text(
-              'Uang Cod',
-              style: primaryTextStyle.copyWith(
-                color: whiteColor.withOpacity(
-                  0.7,
-                ),
+    return ElevatedButton(
+      onPressed: () {
+        nextScreen(const UangCodPage());
+      },
+      style: ElevatedButton.styleFrom(
+        foregroundColor: aliceBlue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            20,
+          ),
+        ),
+        backgroundColor: const Color(
+          0xff1C2F72,
+        ),
+      ),
+      child: Row(
+        children: [
+          Image.asset(
+            icRp,
+            width: 20,
+            height: 20,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            'Uang Cod',
+            style: primaryTextStyle.copyWith(
+              color: whiteColor.withOpacity(
+                0.7,
               ),
             ),
-          ],
-        ),
-        style: ElevatedButton.styleFrom(
-          foregroundColor: aliceBlue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              20,
-            ),
           ),
-          backgroundColor: Color(
-            0xff1C2F72,
-          ),
-        ),
+        ],
       ),
     );
   }
@@ -80,11 +78,11 @@ class _HomePageState extends State<HomePage> {
         color: midnightBlue,
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 24,
         ),
         child: Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 60,
           ),
           child: Column(
@@ -100,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      nextScreen(NotificationPage());
+                      nextScreen(const NotificationPage());
                     },
                     child: Image.asset(
                       icBell,
@@ -110,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 19,
               ),
               Row(
@@ -119,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     width: 50,
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
                             ppImages,
@@ -127,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                           fit: BoxFit.cover),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Column(
@@ -141,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
@@ -152,12 +150,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   buttonUangCod(),
                 ],
               ),
               kerja(),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
             ],
@@ -170,17 +168,17 @@ class _HomePageState extends State<HomePage> {
   Widget kerja() {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 24,
       ),
       decoration: BoxDecoration(
-        color: Color(0xff1C2F72),
+        color: const Color(0xff1C2F72),
         borderRadius: BorderRadius.circular(
           16,
         ),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 18,
         ),
@@ -199,11 +197,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   children: [
                     Text(
-                      '${DateFormat('dd MMMM yyyy').format(now)}',
+                      DateFormat('dd MMMM yyyy').format(now),
                       style: primaryTextStyle.copyWith(
                         fontSize: 12,
                         color: whiteColor.withOpacity(
@@ -211,19 +209,24 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 14,
                     ),
-                    Image.asset(
-                      icArrow,
-                      width: 5,
-                      height: 10,
+                    InkWell(
+                      onTap: () {
+                        nextScreen(const DashboardPage());
+                      },
+                      child: Image.asset(
+                        icArrow,
+                        width: 5,
+                        height: 10,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
             onClick == tap
@@ -253,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       GestureDetector(
@@ -262,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                             ModalStopWork.show(context);
                           });
                         },
-                        child: Image(
+                        child: const Image(
                           width: 46,
                           height: 46,
                           image: AssetImage(icStop),
@@ -272,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )
                 : CustomButton(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       top: 14,
                     ),
                     title: 'Mulai bekerja',
@@ -292,13 +295,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget emptyContent() {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 330,
       ),
       width: double.infinity,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(
             30,
           ),
@@ -308,13 +311,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 24,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Text(
@@ -324,7 +327,7 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 75,
             ),
             Center(
@@ -335,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                     width: 141,
                     height: 141,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -356,13 +359,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget content() {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 330,
       ),
       width: double.infinity,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(
             30,
           ),
@@ -372,13 +375,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 24,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Text(
@@ -390,7 +393,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Center(
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ItemOrder(
@@ -419,10 +422,10 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         width: 60,
         height: 60,
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 20,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               icDriver,

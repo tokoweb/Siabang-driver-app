@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 
-import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-
 class AppBarPrimary extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
@@ -104,8 +102,9 @@ class AppBarPrimary extends StatelessWidget with PreferredSizeWidget {
             Visibility(
               visible: status != null,
               child: Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 alignment: Alignment.center,
+                color: midnightBlue.withOpacity(0.25),
                 child: Text(
                   "$status",
                   style: primaryTextStyle.copyWith(
@@ -113,7 +112,6 @@ class AppBarPrimary extends StatelessWidget with PreferredSizeWidget {
                     color: blackColor,
                   ),
                 ),
-                color: midnightBlue.withOpacity(0.25),
               ),
             ),
           ],

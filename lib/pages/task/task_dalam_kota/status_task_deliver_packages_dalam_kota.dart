@@ -93,6 +93,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                                 : '123456789123456',
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           duration: Duration(
                             seconds: 2,
@@ -194,7 +195,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -214,7 +215,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -249,36 +250,45 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
@@ -342,7 +352,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -362,7 +372,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 170,
                             child: ButtonPrimary(
                               color: Color(0xffE4E6EF),
@@ -397,36 +407,45 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Container(
+                          SizedBox(
                             width: 95,
                             height: 95,
                             child: DataPhoto(
                               onTap: () {
-                                ModalImagePicker.show(context);
+                                ModalImagePicker.show(
+                                  context,
+                                  () {},
+                                );
                               },
                             ),
                           ),
@@ -447,6 +466,7 @@ class _StatusTaskDeliverPackagesDalamKotaPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...[
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: Container(
                         width: screenWidth(context),

@@ -21,7 +21,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controllerForm = TextEditingController();
     controllerForm.addListener(() {
@@ -35,7 +34,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controllerForm.dispose();
   }
@@ -45,10 +43,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     Widget logo() {
       return Center(
         child: Container(
-          margin: EdgeInsets.only(top: 90),
+          margin: const EdgeInsets.only(top: 90),
           width: 180,
           height: 180,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
                 resetLogo,
@@ -61,7 +59,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
     Widget title() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 40,
         ),
         child: Column(
@@ -75,7 +73,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 color: spaceCadet,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -92,9 +90,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
           child: Column(
@@ -102,7 +100,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             children: [
               logo(),
               title(),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Form(
@@ -113,28 +111,29 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   controller: controllerForm,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 190,
               ),
               GestureDetector(
                 onTap: () {
-                  nextScreen(VerifResetPasswordPage());
+                  nextScreen(const VerifResetPasswordPage());
                 },
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: CustomButton(
-                    margin: EdgeInsets.only(),
+                    margin: const EdgeInsets.only(),
                     title: 'Kirim',
                     bgColor: isButtonActive == true
                         ? midnightBlue
-                        : Color(0xffCAC9D1),
+                        : const Color(0xffCAC9D1),
                     textColor: isButtonActive == true
                         ? whiteColor
                         : blackColor.withOpacity(0.5),
                     onPressed: isButtonActive
                         ? () {
                             if (_formKey.currentState!.validate()) {
-                              return nextScreenReplace(CreateNewPasswordPage());
+                              return nextScreenReplace(
+                                  const CreateNewPasswordPage());
                             }
                             setState(() {
                               isButtonActive = true;

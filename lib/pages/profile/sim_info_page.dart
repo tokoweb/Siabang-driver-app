@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:siabang_driver_app/domain/commons/widgets/data_photo.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
-import 'package:siabang_driver_app/widgets/modals/modal_image_picker.dart';
 
 import '../../constant/theme.dart';
 import '../../widgets/multi_text/text_column.dart';
@@ -72,10 +70,10 @@ class SimInfoPage extends StatelessWidget {
                 );
               }).toList(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Divider(
+            const Divider(
               thickness: 1,
             ),
             const SizedBox(height: 16),

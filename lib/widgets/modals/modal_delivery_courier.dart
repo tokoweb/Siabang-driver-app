@@ -8,8 +8,12 @@ import '../../../constant/export_constant.dart';
 import '../../constant/theme.dart';
 
 class ModalDeliveryCourier {
-  static Future show(BuildContext context,
-      {String? initialValue, Function()? onTap, bool? outOfTown}) async {
+  static Future show(
+    BuildContext context, {
+    String? initialValue,
+    Function()? onTap,
+    required bool outOfTown,
+  }) async {
     return await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -25,7 +29,7 @@ class ModalDeliveryCourier {
         return DeliveryCourierModalView(
           initialValue: initialValue,
           onTap: onTap,
-          outOfTown: outOfTown,
+          outTown: outOfTown,
         );
       },
     );
@@ -35,11 +39,14 @@ class ModalDeliveryCourier {
 class DeliveryCourierModalView extends StatefulWidget {
   final String? initialValue;
   final Function()? onTap;
-  final bool? outOfTown;
+  final bool? outTown;
 
-  DeliveryCourierModalView(
-      {Key? key, this.initialValue, this.onTap, this.outOfTown})
-      : super(key: key);
+  const DeliveryCourierModalView({
+    Key? key,
+    this.initialValue,
+    this.onTap,
+    this.outTown,
+  }) : super(key: key);
 
   @override
   State<DeliveryCourierModalView> createState() =>
@@ -48,9 +55,9 @@ class DeliveryCourierModalView extends StatefulWidget {
 
 class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
   TextEditingController queryController = TextEditingController();
-  bool? outOfTown;
   Function()? onTap;
   String? value;
+  bool? outTown;
   List<Map<String, dynamic>> _couriers = [
     {
       "id": "D 1939 YU",
@@ -94,233 +101,237 @@ class _DeliveryCourierModalViewState extends State<DeliveryCourierModalView> {
     super.initState();
     value = widget.initialValue;
     onTap = widget.onTap;
+    outTown = widget.outTown;
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget content() {
+      if (outTown = true) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 50,
+                  height: 5,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Pilih armada",
+              style: primaryTextStyle.copyWith(
+                fontWeight: bold,
+                color: blackColor,
+              ),
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ..._couriersBox.map((e) {
+                      return ListTile(
+                        title: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 34,
+                              height: 34,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    icCarRectangle,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 14,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${e['id']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 14,
+                                    color: blackColor,
+                                  ),
+                                ),
+                                Text(
+                                  "${e['transportation_type']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 11,
+                                    color: greyColor,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          value = e['id'];
+                          setState(() {});
+                        },
+                        trailing: Radio(
+                          groupValue: value,
+                          activeColor: midnightBlue,
+                          value: e['id'] as String,
+                          onChanged: (String? val) {
+                            value = val ?? "";
+                            setState(() {
+                              ModalNoFleet.show(context);
+                            });
+                          },
+                        ),
+                      );
+                    }).toList()
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+          ],
+        );
+      } else {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 50,
+                  height: 5,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Pilih armada",
+              style: primaryTextStyle.copyWith(
+                fontWeight: bold,
+                color: blackColor,
+              ),
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ..._couriers.map((e) {
+                      return ListTile(
+                        title: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 34,
+                              height: 34,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    icVehicle,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 14,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${e['id']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 14,
+                                    color: blackColor,
+                                  ),
+                                ),
+                                Text(
+                                  "${e['transportation_type']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 11,
+                                    color: greyColor,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          value = e['id'];
+                          setState(() {});
+                        },
+                        trailing: Radio(
+                          groupValue: value,
+                          activeColor: midnightBlue,
+                          value: e['id'] as String,
+                          onChanged: (String? val) {
+                            value = val ?? "";
+                            setState(() {
+                              ModalNoFleet.show(context);
+                            });
+                          },
+                        ),
+                      );
+                    }).toList()
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+          ],
+        );
+      }
+    }
+
     return Container(
-        height: screenHeight(context) * 0.55,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          ),
+      height: screenHeight(context) * 0.55,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
         ),
-        child: outOfTown == false
-            ? Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50,
-                        height: 5,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Pilih armada",
-                    style: primaryTextStyle.copyWith(
-                      fontWeight: bold,
-                      color: blackColor,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ..._couriers.map((e) {
-                            return ListTile(
-                              title: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 34,
-                                    height: 34,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          icVehicle,
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 14,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${e['id']}",
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 14,
-                                          color: blackColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${e['transportation_type']}",
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 11,
-                                          color: greyColor,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                value = e['id'];
-                                setState(() {});
-                              },
-                              trailing: Radio(
-                                groupValue: value,
-                                activeColor: midnightBlue,
-                                value: e['id'] as String,
-                                onChanged: (String? val) {
-                                  value = val ?? "";
-                                  setState(() {
-                                    ModalNoFleet.show(context);
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList()
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(16),
-                    child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              )
-            : Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50,
-                        height: 5,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Pilih armada",
-                    style: primaryTextStyle.copyWith(
-                      fontWeight: bold,
-                      color: blackColor,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ..._couriersBox.map((e) {
-                            return ListTile(
-                              title: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 34,
-                                    height: 34,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          icCarRectangle,
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 14,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${e['id']}",
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 14,
-                                          color: blackColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${e['transportation_type']}",
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 11,
-                                          color: greyColor,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                value = e['id'];
-                                setState(() {});
-                              },
-                              trailing: Radio(
-                                groupValue: value,
-                                activeColor: midnightBlue,
-                                value: e['id'] as String,
-                                onChanged: (String? val) {
-                                  value = val ?? "";
-                                  setState(() {
-                                    ModalNoFleet.show(context);
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList()
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(16),
-                    child: ButtonPrimary(title: "Pilih", onTap: onTap ?? () {}),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ));
+      ),
+      child: content(),
+    );
   }
 }
