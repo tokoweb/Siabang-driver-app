@@ -8,6 +8,7 @@ import 'package:siabang_driver_app/pages/notif/notif_page.dart';
 import 'package:siabang_driver_app/pages/uang_cod/uang_cod_page.dart';
 import 'package:siabang_driver_app/widgets/button/custom_button.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_search_order.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_start_work.dart';
 import 'package:siabang_driver_app/widgets/modals/modal_stop_work.dart';
 import 'package:siabang_driver_app/widgets/task/task_page.dart';
 
@@ -184,47 +185,47 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Siap bekerja hari ini ?',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 12,
-                    color: whiteColor.withOpacity(
-                      0.7,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    Text(
-                      DateFormat('dd MMMM yyyy').format(now),
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 12,
-                        color: whiteColor.withOpacity(
-                          0.7,
-                        ),
+            InkWell(
+              onTap: () {
+                nextScreen(DashboardPage());
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Siap bekerja hari ini ?',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 12,
+                      color: whiteColor.withOpacity(
+                        0.7,
                       ),
                     ),
-                    const SizedBox(
-                      width: 14,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        nextScreen(const DashboardPage());
-                      },
-                      child: Image.asset(
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Text(
+                        DateFormat('dd MMMM yyyy').format(now),
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          color: whiteColor.withOpacity(
+                            0.7,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      Image.asset(
                         icArrow,
                         width: 5,
                         height: 10,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 14,
@@ -282,6 +283,7 @@ class _HomePageState extends State<HomePage> {
                     textColor: whiteColor,
                     bgColor: crimsonColor,
                     onPressed: () {
+                      ModalStartWork.show(context);
                       setState(() {
                         onClick = false;
                         onClick == tap;
@@ -385,7 +387,7 @@ class _HomePageState extends State<HomePage> {
               height: 24,
             ),
             Text(
-              'Orderan Masuk (8)',
+              'Orderan Masuk (${items.length.toInt()})',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -422,9 +424,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         width: 60,
         height: 60,
-        margin: const EdgeInsets.only(
-          top: 20,
-        ),
+        margin: const EdgeInsets.only(),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -439,13 +439,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool orderIsAvailable = true;
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Stack(
           children: [
             header(),
-            content(),
+            if (orderIsAvailable == true)
+              content()
+            else if (orderIsAvailable == false)
+              emptyContent(),
           ],
         ),
       ),

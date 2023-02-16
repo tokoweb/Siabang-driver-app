@@ -27,7 +27,7 @@ class _ItemOrderState extends State<ItemOrder> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 30),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -250,17 +250,6 @@ class CompletedBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        SizedBox(
-          height: 40,
-          child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Antar ke lokasi',
-              textColor: whiteColor,
-              bgColor: const Color(0xff6975DC),
-              onPressed: () {}),
-        ),
       ],
     );
   }
@@ -311,17 +300,6 @@ class ShippedBody extends StatelessWidget {
         ),
         const SizedBox(
           height: 10,
-        ),
-        SizedBox(
-          height: 40,
-          child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Jemput di lokasi & kirim',
-              textColor: whiteColor,
-              bgColor: const Color(0xff08B6C1),
-              onPressed: () {}),
         ),
       ],
     );
@@ -424,17 +402,6 @@ class PendingBody extends StatelessWidget {
         ),
         const SizedBox(
           height: 10,
-        ),
-        SizedBox(
-          height: 40,
-          child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Jemput di lokasi',
-              textColor: whiteColor,
-              bgColor: const Color(0xff258BD4),
-              onPressed: () {}),
         ),
       ],
     );
@@ -885,17 +852,6 @@ class RejectedBody extends StatelessWidget {
         ),
         const SizedBox(
           height: 10,
-        ),
-        SizedBox(
-          height: 40,
-          child: CustomButton(
-              margin: const EdgeInsets.only(
-                top: 30,
-              ),
-              title: 'Kirim',
-              textColor: whiteColor,
-              bgColor: const Color(0xffF49D36),
-              onPressed: () {}),
         ),
       ],
     );

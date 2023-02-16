@@ -32,7 +32,11 @@ dependencies:
   flutter:
     sdk: flutter
   app_tracking_transparency: ^2.0.3
+  camera:
+  path_provider:
+  path:
   carousel_slider: ^4.2.1
+  jiffy: ^5.0.0
   device_preview: ^1.1.0
   dotted_border: ^2.0.0+3
   flutter_screenutil: ^5.6.0
@@ -51,6 +55,8 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   image_picker: ^0.8.6+1
   sliding_up_panel: ^2.0.0+1
+  calendar_date_picker2: ^0.3.7
+  qrscan: ^0.3.3
 
 dev_dependencies:
   flutter_test:

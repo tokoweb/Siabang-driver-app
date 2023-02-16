@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:siabang_driver_app/constant/images.dart';
 import 'package:siabang_driver_app/constant/theme.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
 import 'package:siabang_driver_app/domain/commons/widgets/row_text.dart';
+import 'package:siabang_driver_app/pages/dashboard/widget/summary_daily_task_card.dart';
 import 'package:siabang_driver_app/pages/dashboard/widget/total_widget_card.dart';
 import 'package:siabang_driver_app/pages/uang_cod/uang_cod_page.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
+import 'package:siabang_driver_app/widgets/button/button_primary.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_date_picker.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_month_picker.dart';
+import 'package:siabang_driver_app/widgets/modals/modal_urutkan.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -15,6 +21,36 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  var date = DateTime.now();
+
+  final DateFormat formatter = DateFormat("dd-MMMM-yyyy");
+  List items = [];
+  final ScrollController _scrollController = ScrollController();
+  int _currentMax = 10;
+
+  @override
+  void initState() {
+    items = List.generate(5, (index) => const SummaryDailyTaskCard());
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData();
+      }
+    });
+  }
+
+  _getMoreData() {
+    for (items.length = _currentMax;
+        items.length < _currentMax;
+        items.length++) {
+      items.add(items.length + 1);
+    }
+    _currentMax = _currentMax;
+
+    setState(() {});
+  }
+
   Widget buttonUangCod() {
     return ElevatedButton(
       onPressed: () {
@@ -82,7 +118,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -103,7 +139,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -124,7 +160,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -157,7 +193,6 @@ class _DashboardPageState extends State<DashboardPage> {
         top: 230,
       ),
       width: double.infinity,
-      height: screenHeight(context),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: const BorderRadius.only(
@@ -182,18 +217,40 @@ class _DashboardPageState extends State<DashboardPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.chevron_left),
-                Text(
-                  'Januari 2023 ',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
+                InkWell(
+                  onTap: () {
+                    date = DateTime(
+                      date.year,
+                      date.month - 1,
+                    );
+                    setState(() {});
+                  },
+                  child: const Icon(Icons.chevron_left),
+                ),
+                InkWell(
+                  onTap: () {
+                    ModalMonthPicker.show(context);
+                  },
+                  child: Text(
+                    DateFormat('MMMM yyyy').format(date),
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
                   ),
                 ),
-                const Icon(Icons.chevron_right),
+                InkWell(
+                    onTap: () {
+                      date = DateTime(
+                        date.year,
+                        date.month + 1,
+                      );
+                      setState(() {});
+                    },
+                    child: const Icon(Icons.chevron_right)),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Container(
@@ -214,7 +271,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -234,7 +291,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -252,7 +309,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -272,8 +329,96 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 24,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Center(
+              child: ListView.builder(
+                itemExtent: 177,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: items.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == items.length && items.length != _currentMax) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return const SummaryDailyTaskCard();
+                },
+                shrinkWrap: true,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buttonFilter() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade300,
+            blurRadius: 4,
+            offset: const Offset(0, 3),
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: ButtonPrimary(
+              icon: Container(
+                width: 24,
+                height: 24,
+                child: Image(
+                  image: AssetImage(icSortir),
+                  color: whiteColor,
+                ),
+              ),
+              title: 'Urutkan',
+              onTap: () {
+                ModalUrutkanTask.show(context);
+              },
+            ),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            child: ButtonPrimary(
+              icon: Container(
+                width: 24,
+                height: 24,
+                child: Image(
+                  image: AssetImage(icFilter),
+                  color: whiteColor,
+                ),
+              ),
+              title: 'Filter',
+              onTap: () {
+                ModalFilterTask.show(context);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -285,6 +430,7 @@ class _DashboardPageState extends State<DashboardPage> {
         title: 'Dashboard',
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         scrollDirection: Axis.vertical,
         child: Stack(
           children: [
@@ -293,6 +439,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
+      bottomNavigationBar: buttonFilter(),
     );
   }
 }

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
-import 'package:siabang_driver_app/pages/task/detail_order_page.dart';
+import 'package:siabang_driver_app/pages/task/detail_status_task_reject.dart';
 import 'package:siabang_driver_app/widgets/appbar/appbar_primary.dart';
 import 'package:siabang_driver_app/widgets/task/item_bar_task.dart';
 
@@ -31,7 +31,6 @@ class _TaskPageState extends State<TaskPage> {
     STATUSORDER.PENDING,
     STATUSORDER.REJECTED,
     STATUSORDER.COMPlETED,
-    STATUSORDER.NEW,
   ];
 
   List<STATUSORDER> bckupItems = [];
@@ -70,7 +69,7 @@ class _TaskPageState extends State<TaskPage> {
                   return ItemOrder(
                     statusOrder: items[index],
                     onTap: () {
-                      nextScreen(DetailOrderPage(
+                      nextScreen(StatusDetailTaskRejectedPage(
                         status: items[index],
                         statusdriver: () {
                           if (index == 1) {

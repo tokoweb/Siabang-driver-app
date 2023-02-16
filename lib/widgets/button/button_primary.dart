@@ -60,7 +60,7 @@ class ButtonPrimary extends StatelessWidget {
             alignment: alignment ?? Alignment.center,
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (icon != null && isTrailingIcon == false)
                   Row(

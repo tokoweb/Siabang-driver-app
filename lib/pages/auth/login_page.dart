@@ -182,24 +182,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: bgColor,
       body: SingleChildScrollView(
-        reverse: true,
         physics: const BouncingScrollPhysics(),
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-          child: Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 24,
-            ),
-            child: Column(
-              children: [
-                header(),
-                textButton(),
-                button(),
-              ],
-            ),
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          child: Column(
+            children: [
+              header(),
+              textButton(),
+              button(),
+            ],
           ),
         ),
       ),

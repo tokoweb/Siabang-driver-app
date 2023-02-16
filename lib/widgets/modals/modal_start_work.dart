@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:siabang_driver_app/constant/export_constant.dart';
 import 'package:siabang_driver_app/domain/commons/nav_utils.dart';
+import 'package:siabang_driver_app/pages/main_page.dart';
 import 'package:siabang_driver_app/widgets/button/button_outline.dart';
 import 'package:siabang_driver_app/widgets/button/button_primary.dart';
 
@@ -18,19 +19,15 @@ class ModalStartWork {
       ),
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return const ContinueLiveChatModalView(
-          onClick: true,
-        );
+        return const ContinueLiveChatModalView();
       },
     );
   }
 }
 
 class ContinueLiveChatModalView extends StatelessWidget {
-  const ContinueLiveChatModalView({Key? key, required this.onClick})
-      : super(key: key);
+  const ContinueLiveChatModalView({Key? key}) : super(key: key);
 
-  final bool onClick;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,7 +60,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
           ),
           const SizedBox(height: kToolbarHeight),
           Image.asset(
-            icDriver,
+            icBox,
             width: 90,
             height: 90,
           ),
@@ -78,7 +75,7 @@ class ContinueLiveChatModalView extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           Row(
             children: [
               Expanded(
@@ -95,7 +92,9 @@ class ContinueLiveChatModalView extends StatelessWidget {
               Expanded(
                 child: ButtonOutline(
                   title: 'Ya',
-                  onTap: () {},
+                  onTap: () {
+                    nextScreen(const MainScreen());
+                  },
                 ),
               ),
             ],
